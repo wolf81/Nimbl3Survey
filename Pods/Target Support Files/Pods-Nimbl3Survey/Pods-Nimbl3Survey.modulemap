@@ -1,0 +1,6 @@
+framework module Pods_Nimbl3Survey {
+  umbrella header "Pods-Nimbl3Survey-umbrella.h"
+
+  export *
+  module * { export * }
+}
