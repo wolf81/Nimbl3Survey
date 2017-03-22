@@ -30,10 +30,11 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYh-eN-Iui">
-                    <rect key="frame" x="75" y="410" width="170" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYh-eN-Iui">
+                    <rect key="frame" x="75.5" y="396" width="170" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="170" id="CHf-jT-Zfe"/>
+                        <constraint firstAttribute="height" constant="44" id="XkF-62-E5W"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                     <state key="normal" title="Take the survey">
@@ -54,7 +55,6 @@
                 <constraint firstAttribute="trailing" secondItem="dEe-bZ-vJ0" secondAttribute="trailing" constant="20" id="RTz-fw-ysi"/>
                 <constraint firstItem="gmB-7O-3eq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YXi-MK-8Zq"/>
                 <constraint firstAttribute="trailing" secondItem="gmB-7O-3eq" secondAttribute="trailing" id="bvE-6K-xyS"/>
-                <constraint firstItem="zYh-eN-Iui" firstAttribute="top" secondItem="gmB-7O-3eq" secondAttribute="bottom" constant="-70" id="lQt-Op-Y0E"/>
                 <constraint firstItem="zYh-eN-Iui" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="oDl-hY-ieA"/>
                 <constraint firstItem="dEe-bZ-vJ0" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="u9g-E9-BnC"/>
                 <constraint firstItem="dEe-bZ-vJ0" firstAttribute="top" secondItem="2eG-nh-Wb3" secondAttribute="bottom" constant="23" id="usR-K1-jlB"/>

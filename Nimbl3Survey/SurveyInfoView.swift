@@ -14,12 +14,25 @@ class SurveyInfoView: UIView, InterfaceBuilderInstantiable {
     @IBOutlet weak var surveyButton: UIButton?
     @IBOutlet weak var imageView: UIImageView?
     
+    // MARK: - Initialization
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
-        let buttonImage = UIImage.from(color: UIColor.red)
-        self.surveyButton?.setBackgroundImage(buttonImage, for: .normal)
     }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        if let surveyButton = self.surveyButton {
+            let bgImage = UIImage.from(color: UIColor.red)
+            surveyButton.setBackgroundImage(bgImage, for: .normal)
+            let cornerRadius: CGFloat = surveyButton.frame.height / 2
+            self.surveyButton?.layer.cornerRadius = cornerRadius
+            self.surveyButton?.layer.masksToBounds = true
+        }
+    }
+    
+    // MARK: - Public
     
     @IBAction func surveyAction() {
         print("perform survey action")
