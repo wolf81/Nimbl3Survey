@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var refreshButton: UIBarButtonItem?
+    @IBOutlet weak var menuButton: UIBarButtonItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,5 +23,12 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func refreshAction() {
+        print("perform refresh action")
+    }
+    
+    @IBAction func menuAction() {
+        print("perform menu action")
+    }
 }
 
