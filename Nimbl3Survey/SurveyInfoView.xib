@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SurveyInfoView" customModule="Nimbl3Survey" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gmB-7O-3eq">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eG-nh-Wb3">
+                    <rect key="frame" x="118.5" y="97" width="83" height="48"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEe-bZ-vJ0">
+                    <rect key="frame" x="20" y="168" width="280" height="26.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYh-eN-Iui">
+                    <rect key="frame" x="75.5" y="396" width="170" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="170" id="CHf-jT-Zfe"/>
+                        <constraint firstAttribute="height" constant="44" id="XkF-62-E5W"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <state key="normal" title="Take the survey">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="surveyAction" destination="iN0-l3-epB" eventType="touchUpInside" id="Wx5-RA-dgA"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="2eG-nh-Wb3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="97" id="1hS-kE-zOn"/>
+                <constraint firstItem="2eG-nh-Wb3" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="6ca-d1-UZa"/>
+                <constraint firstAttribute="bottom" secondItem="gmB-7O-3eq" secondAttribute="bottom" id="G97-Di-1XU"/>
+                <constraint firstItem="gmB-7O-3eq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Jd8-9d-fta"/>
+                <constraint firstAttribute="bottom" secondItem="zYh-eN-Iui" secondAttribute="bottom" constant="40" id="KTh-FT-9VQ"/>
+                <constraint firstAttribute="trailing" secondItem="dEe-bZ-vJ0" secondAttribute="trailing" constant="20" id="RTz-fw-ysi"/>
+                <constraint firstItem="gmB-7O-3eq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YXi-MK-8Zq"/>
+                <constraint firstAttribute="trailing" secondItem="gmB-7O-3eq" secondAttribute="trailing" id="bvE-6K-xyS"/>
+                <constraint firstItem="zYh-eN-Iui" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="oDl-hY-ieA"/>
+                <constraint firstItem="dEe-bZ-vJ0" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="u9g-E9-BnC"/>
+                <constraint firstItem="dEe-bZ-vJ0" firstAttribute="top" secondItem="2eG-nh-Wb3" secondAttribute="bottom" constant="23" id="usR-K1-jlB"/>
+                <constraint firstItem="dEe-bZ-vJ0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="ymv-Og-zPb"/>
+            </constraints>
+            <connections>
+                <outlet property="detailsLabel" destination="dEe-bZ-vJ0" id="XJ0-MJ-I7W"/>
+                <outlet property="imageView" destination="gmB-7O-3eq" id="CxS-uY-rNY"/>
+                <outlet property="surveyButton" destination="zYh-eN-Iui" id="NzP-DE-Pv3"/>
+                <outlet property="titleLabel" destination="2eG-nh-Wb3" id="zDR-Po-Pcf"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
+        </view>
+    </objects>
+</document>

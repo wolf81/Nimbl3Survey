@@ -15,6 +15,10 @@
 		79F33F721E823EDD00634B9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79F33F701E823EDD00634B9C /* LaunchScreen.storyboard */; };
 		79F33F7D1E823EDD00634B9C /* Nimbl3SurveyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F33F7C1E823EDD00634B9C /* Nimbl3SurveyTests.swift */; };
 		79F33F881E823EDD00634B9C /* Nimbl3SurveyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F33F871E823EDD00634B9C /* Nimbl3SurveyUITests.swift */; };
+		79F33F961E82619200634B9C /* SurveyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F33F951E82619200634B9C /* SurveyInfoView.swift */; };
+		79F33F981E827E9100634B9C /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F33F971E827E9100634B9C /* UIImageExtensions.swift */; };
+		79F33F9A1E82812E00634B9C /* SurveyInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F33F991E82812E00634B9C /* SurveyInfoView.xib */; };
+		79F33F9C1E8284A300634B9C /* InterfaceBuilderInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F33F9B1E8284A300634B9C /* InterfaceBuilderInstantiable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +52,10 @@
 		79F33F831E823EDD00634B9C /* Nimbl3SurveyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Nimbl3SurveyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		79F33F871E823EDD00634B9C /* Nimbl3SurveyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nimbl3SurveyUITests.swift; sourceTree = "<group>"; };
 		79F33F891E823EDD00634B9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79F33F951E82619200634B9C /* SurveyInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyInfoView.swift; sourceTree = "<group>"; };
+		79F33F971E827E9100634B9C /* UIImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
+		79F33F991E82812E00634B9C /* SurveyInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SurveyInfoView.xib; sourceTree = "<group>"; };
+		79F33F9B1E8284A300634B9C /* InterfaceBuilderInstantiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceBuilderInstantiable.swift; sourceTree = "<group>"; };
 		8E80D50A74CE04198313BC84 /* Pods-Nimbl3Survey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nimbl3Survey.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nimbl3Survey/Pods-Nimbl3Survey.debug.xcconfig"; sourceTree = "<group>"; };
 		9021A2D512088113AC55C155 /* Pods-Nimbl3Survey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nimbl3Survey.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nimbl3Survey/Pods-Nimbl3Survey.release.xcconfig"; sourceTree = "<group>"; };
 		EC9FA8A3BA5CDF788ED20849 /* Pods_Nimbl3Survey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nimbl3Survey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +126,10 @@
 				79F33F6E1E823EDD00634B9C /* Assets.xcassets */,
 				79F33F701E823EDD00634B9C /* LaunchScreen.storyboard */,
 				79F33F731E823EDD00634B9C /* Info.plist */,
+				79F33F951E82619200634B9C /* SurveyInfoView.swift */,
+				79F33F971E827E9100634B9C /* UIImageExtensions.swift */,
+				79F33F991E82812E00634B9C /* SurveyInfoView.xib */,
+				79F33F9B1E8284A300634B9C /* InterfaceBuilderInstantiable.swift */,
 			);
 			path = Nimbl3Survey;
 			sourceTree = "<group>";
@@ -262,6 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79F33F9A1E82812E00634B9C /* SurveyInfoView.xib in Resources */,
 				79F33F721E823EDD00634B9C /* LaunchScreen.storyboard in Resources */,
 				79F33F6F1E823EDD00634B9C /* Assets.xcassets in Resources */,
 				79F33F6D1E823EDD00634B9C /* Main.storyboard in Resources */,
@@ -337,8 +350,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79F33F961E82619200634B9C /* SurveyInfoView.swift in Sources */,
 				79F33F6A1E823EDD00634B9C /* ViewController.swift in Sources */,
 				79F33F681E823EDD00634B9C /* AppDelegate.swift in Sources */,
+				79F33F9C1E8284A300634B9C /* InterfaceBuilderInstantiable.swift in Sources */,
+				79F33F981E827E9100634B9C /* UIImageExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +607,7 @@
 				79F33F8E1E823EDD00634B9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		79F33F8F1E823EDD00634B9C /* Build configuration list for PBXNativeTarget "Nimbl3SurveyTests" */ = {
 			isa = XCConfigurationList;
@@ -599,6 +616,7 @@
 				79F33F911E823EDD00634B9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		79F33F921E823EDD00634B9C /* Build configuration list for PBXNativeTarget "Nimbl3SurveyUITests" */ = {
 			isa = XCConfigurationList;
@@ -607,6 +625,7 @@
 				79F33F941E823EDD00634B9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
