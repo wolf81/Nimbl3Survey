@@ -15,16 +15,16 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gmB-7O-3eq">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gmB-7O-3eq">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eG-nh-Wb3">
-                    <rect key="frame" x="118.5" y="97" width="83" height="48"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eG-nh-Wb3">
+                    <rect key="frame" x="20" y="97" width="280" height="48"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEe-bZ-vJ0">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEe-bZ-vJ0">
                     <rect key="frame" x="20" y="168" width="280" height="26.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -49,6 +49,8 @@
             <constraints>
                 <constraint firstItem="2eG-nh-Wb3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="97" id="1hS-kE-zOn"/>
                 <constraint firstItem="2eG-nh-Wb3" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="6ca-d1-UZa"/>
+                <constraint firstItem="2eG-nh-Wb3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="7ld-ch-vPH"/>
+                <constraint firstAttribute="trailing" secondItem="2eG-nh-Wb3" secondAttribute="trailing" constant="20" id="Ddp-L7-s6s"/>
                 <constraint firstAttribute="bottom" secondItem="gmB-7O-3eq" secondAttribute="bottom" id="G97-Di-1XU"/>
                 <constraint firstItem="gmB-7O-3eq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Jd8-9d-fta"/>
                 <constraint firstAttribute="bottom" secondItem="zYh-eN-Iui" secondAttribute="bottom" constant="40" id="KTh-FT-9VQ"/>
@@ -61,7 +63,7 @@
                 <constraint firstItem="dEe-bZ-vJ0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="ymv-Og-zPb"/>
             </constraints>
             <connections>
-                <outlet property="detailsLabel" destination="dEe-bZ-vJ0" id="XJ0-MJ-I7W"/>
+                <outlet property="descriptionLabel" destination="dEe-bZ-vJ0" id="soL-CK-n5m"/>
                 <outlet property="imageView" destination="gmB-7O-3eq" id="CxS-uY-rNY"/>
                 <outlet property="surveyButton" destination="zYh-eN-Iui" id="NzP-DE-Pv3"/>
                 <outlet property="titleLabel" destination="2eG-nh-Wb3" id="zDR-Po-Pcf"/>

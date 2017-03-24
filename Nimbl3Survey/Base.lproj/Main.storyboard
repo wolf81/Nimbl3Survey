@@ -28,7 +28,7 @@
         <!--Surveys-->
         <scene sceneID="zva-wk-7Hk">
             <objects>
-                <viewController title="Surveys" id="IqW-kX-oct" customClass="ViewController" customModule="Nimbl3Survey" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Surveys" id="IqW-kX-oct" customClass="SurveysViewController" customModule="Nimbl3Survey" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nQ9-SJ-U01"/>
                         <viewControllerLayoutGuide type="bottom" id="5Fi-CK-y4h"/>

@@ -12,8 +12,7 @@ public protocol InterfaceBuilderInstantiable {
     static var associatedNib : UINib { get }
 }
 
-extension InterfaceBuilderInstantiable
-{
+extension InterfaceBuilderInstantiable {
     static func instantiateFromInterfaceBuilder() -> Self {
         return associatedNib.instantiate(withOwner:nil, options: [:]).first as! Self
     }
