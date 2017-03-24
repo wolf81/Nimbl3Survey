@@ -14,24 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        do {
-            try SurveyApiClient.shared.surveys(completion: { result, error in
-                guard let surveys = result else {
-                    // TODO: Show error.
-                    return
-                }
                 
-                let navigationController = self.window?.rootViewController as? UINavigationController
-                let surveyViewController = navigationController?.viewControllers.first as? ViewController
-                if let survey = surveys.first {
-                    surveyViewController?.updateWithSurvey(survey)
-                }
-            })
-        } catch let error {
-            print("error: \(error)")
-        }
-        
         return true
     }
 
@@ -56,7 +39,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 

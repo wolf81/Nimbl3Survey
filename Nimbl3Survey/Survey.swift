@@ -9,7 +9,14 @@
 import Foundation
 
 enum SurveyError: LocalizedError {
-    case invalidJson
+    case invalidJson(json: [String: AnyObject])
+    
+    var errorDescription: String? {
+        switch self {
+        case .invalidJson(let json):
+            return NSLocalizedString("invalid json, cannot create \"Survey\" object from json: \(json)", comment: "")
+        }
+    }
 }
 
 class Survey {
@@ -17,12 +24,12 @@ class Survey {
     let description: String
     let imageUrl: URL
     
-    init(jsonObject: [String: AnyObject]) throws {
+    init(json: [String: AnyObject]) throws {
         guard
-            let title = jsonObject["title"] as? String,
-            let description = jsonObject["description"] as? String,
-            let coverImageUrlString = jsonObject["cover_image_url"] as? String else {
-                throw SurveyError.invalidJson
+            let title = json["title"] as? String,
+            let description = json["description"] as? String,
+            let coverImageUrlString = json["cover_image_url"] as? String else {
+                throw SurveyError.invalidJson(json: json)
         }
         
         self.title = title

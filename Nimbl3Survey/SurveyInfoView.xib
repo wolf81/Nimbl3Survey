@@ -24,7 +24,7 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEe-bZ-vJ0">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEe-bZ-vJ0">
                     <rect key="frame" x="20" y="168" width="280" height="26.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -63,7 +63,7 @@
                 <constraint firstItem="dEe-bZ-vJ0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="ymv-Og-zPb"/>
             </constraints>
             <connections>
-                <outlet property="detailsLabel" destination="dEe-bZ-vJ0" id="XJ0-MJ-I7W"/>
+                <outlet property="descriptionLabel" destination="dEe-bZ-vJ0" id="soL-CK-n5m"/>
                 <outlet property="imageView" destination="gmB-7O-3eq" id="CxS-uY-rNY"/>
                 <outlet property="surveyButton" destination="zYh-eN-Iui" id="NzP-DE-Pv3"/>
                 <outlet property="titleLabel" destination="2eG-nh-Wb3" id="zDR-Po-Pcf"/>

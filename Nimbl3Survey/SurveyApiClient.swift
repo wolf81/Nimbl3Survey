@@ -10,28 +10,34 @@ import Foundation
 import p2_OAuth2
 import Alamofire
 
-//Integrate with the following API (Oauth 2 API):
-//
-//Endpoints: https://nimbl3-survey-api.herokuapp.com
-//
-//Credentials:
-//
-//Params name: access_token
-//Token: d9584af77d8c0d6622e2b3c554ed520b2ae64ba0721e52daa12d6eaa5e5cdd93
+// The SurveyApiClient retrieves data from the back-end using OAuth2.
+// The access token is automatically refreshed and added to the keychain by the 
+// included OAuth2 library. This library can then be used to construct new
+// requests that automatically include the correct headers.
+// 
+// For convienience it's recommended by the author of this library to 
+// authorize at the start of every request. The OAuth2 client should not 
+// actually perform a new authorization request if our access token in the 
+// keychain is still valid.
 
-//To get the high resolution image just append “l” to the image url you obtain in the API response
-//If you get timeout or it’s too slow you can paginate the results using  page, per_page query params  e.g. https://nimbl3-survey-api.herokuapp.com/surveys.json?page=1&per_page=10
-//If the token is expired, a new one can be obtained via https://nimbl3-survey-api.herokuapp.com/oauth/token
-//
-//curl https://nimbl3-survey-api.herokuapp.com/oauth/token --data  "grant_type=password&username=carlos@nimbl3.com&password=antikera"
-//
-//The response should be:
-//
-//{"access_token":"d9584af77d8c0d6622e2b3c554ed520b2ae64ba0721e52daa12d6eaa5e5cdd93","token_type":"bearer","expires_in":7200,"created_at":1485174186}
+// TODO 1: Add support for image loading. Automatically load high resolution
+// images for supported devices. High resolution images can be loaded by 
+// appending "l" to the image URL.
 
-enum SurveyApiClientError: Error {
+// TODO 2: Load theme as well and apply to the survey info screen.
+
+enum SurveyApiClientError: LocalizedError {
     case invalidHttpStatusCode(code: Int)
+    case failedConversionToJson
     case noData
+    
+    var errorDescription: String? {
+        switch self {
+        case .invalidHttpStatusCode(let code): return NSLocalizedString("invalid http status code: \(code)", comment: "")
+        case .noData: return NSLocalizedString("no data from back-end", comment: "")
+        case .failedConversionToJson: return NSLocalizedString("failed to convert data to json", comment: "")
+        }
+    }
 }
 
 class SurveyApiClient {
@@ -40,8 +46,6 @@ class SurveyApiClient {
     private let baseUrl = URL(string: "https://nimbl3-survey-api.herokuapp.com")!
 
     private var oauthClient: OAuth2?
-
-    private var token: String?
     
     private func authorize(completion: @escaping ((_ success: Bool, _ error: Error?) -> Void)) {
         let oauthClient = OAuth2PasswordGrant(settings: [
@@ -62,7 +66,7 @@ class SurveyApiClient {
         }
     }
     
-    func surveys(page: Int = 1, count: Int = 10, completion: @escaping ((_ surveys: [Survey]?, _ error: Error?) -> Void)) throws {
+    func loadSurveys(page: Int = 1, count: Int = 10, completion: @escaping ((_ result: [Survey]?, _ error: Error?) -> Void)) throws {
         authorize { (success, error) in
             guard success == true else {
                 DispatchQueue.main.async { completion(nil, error) }
@@ -72,19 +76,19 @@ class SurveyApiClient {
             let url = self.baseUrl.appendingPathComponent("surveys.json?page=\(page)&per_page=\(count)")
             let req = (self.oauthClient?.request(forURL: url))!
             let task = self.oauthClient?.session.dataTask(with: req) { data, response, error in
-                let httpResponse = (response as! HTTPURLResponse)
-                let isValidResponse = (200 ..< 300).contains(httpResponse.statusCode)
-                
-                guard isValidResponse == true else {
+                guard error == nil else {
                     DispatchQueue.main.async {
-                        completion(nil, SurveyApiClientError.invalidHttpStatusCode(code: httpResponse.statusCode))
+                        completion(nil, error!)
                     }
                     return
                 }
 
-                guard error == nil else {
+                // Make sure the HTTP status code is in the succes range.
+                let httpResponse = (response as! HTTPURLResponse)
+                let isValidResponse = (200 ..< 300).contains(httpResponse.statusCode)
+                guard isValidResponse == true else {
                     DispatchQueue.main.async {
-                        completion(nil, error!)
+                        completion(nil, SurveyApiClientError.invalidHttpStatusCode(code: httpResponse.statusCode))
                     }
                     return
                 }
@@ -97,14 +101,17 @@ class SurveyApiClient {
                 }
                 
                 do {
-                    var surveys = [Survey]()
-                    
-                    guard let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as? Array<Any> else {
+                    guard let jsonArray = try JSONSerialization.jsonObject(with: jsonData, options: []) as? Array<Any> else {
+                        DispatchQueue.main.async {
+                            completion(nil, SurveyApiClientError.failedConversionToJson)
+                        }
                         return
                     }
                     
-                    for jsonObject in json {
-                        let survey = try Survey(jsonObject: jsonObject as! [String: AnyObject])
+                    var surveys = [Survey]()
+                    
+                    for jsonObject in jsonArray {
+                        let survey = try Survey(json: jsonObject as! [String: AnyObject])
                         surveys.append(survey)
                     }
                     
