@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		255707A77961A1A75E8FBDD8 /* Pods_Nimbl3Survey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC9FA8A3BA5CDF788ED20849 /* Pods_Nimbl3Survey.framework */; };
 		791311FC1E8505C3009D0064 /* SurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791311FB1E8505C3009D0064 /* SurveyViewController.swift */; };
+		791311FE1E852141009D0064 /* PageIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791311FD1E852141009D0064 /* PageIndicatorView.swift */; };
+		791312001E8524D6009D0064 /* SurveysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791311FF1E8524D6009D0064 /* SurveysView.swift */; };
+		791312021E852549009D0064 /* SurveysView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 791312011E852549009D0064 /* SurveysView.xib */; };
 		7959B1FD1E84D3F900F81327 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7959B1FC1E84D3F900F81327 /* Survey.swift */; };
 		79F33F681E823EDD00634B9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F33F671E823EDD00634B9C /* AppDelegate.swift */; };
 		79F33F6A1E823EDD00634B9C /* SurveysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F33F691E823EDD00634B9C /* SurveysViewController.swift */; };
@@ -44,6 +47,9 @@
 
 /* Begin PBXFileReference section */
 		791311FB1E8505C3009D0064 /* SurveyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyViewController.swift; sourceTree = "<group>"; };
+		791311FD1E852141009D0064 /* PageIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIndicatorView.swift; sourceTree = "<group>"; };
+		791311FF1E8524D6009D0064 /* SurveysView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveysView.swift; sourceTree = "<group>"; };
+		791312011E852549009D0064 /* SurveysView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SurveysView.xib; sourceTree = "<group>"; };
 		7959B1FC1E84D3F900F81327 /* Survey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
 		79F33F641E823EDD00634B9C /* Nimbl3Survey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nimbl3Survey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79F33F671E823EDD00634B9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +155,9 @@
 				79F33F991E82812E00634B9C /* SurveyInfoView.xib */,
 				79F33F9B1E8284A300634B9C /* InterfaceBuilderInstantiable.swift */,
 				79F33F9F1E83D29B00634B9C /* SurveyApiClient.swift */,
+				791311FD1E852141009D0064 /* PageIndicatorView.swift */,
+				791311FF1E8524D6009D0064 /* SurveysView.swift */,
+				791312011E852549009D0064 /* SurveysView.xib */,
 			);
 			path = Nimbl3Survey;
 			sourceTree = "<group>";
@@ -296,6 +305,7 @@
 			files = (
 				79F33F9A1E82812E00634B9C /* SurveyInfoView.xib in Resources */,
 				79F33F721E823EDD00634B9C /* LaunchScreen.storyboard in Resources */,
+				791312021E852549009D0064 /* SurveysView.xib in Resources */,
 				79F33F6F1E823EDD00634B9C /* Assets.xcassets in Resources */,
 				79F33F6D1E823EDD00634B9C /* Main.storyboard in Resources */,
 			);
@@ -372,12 +382,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				79F33F961E82619200634B9C /* SurveyInfoView.swift in Sources */,
+				791311FE1E852141009D0064 /* PageIndicatorView.swift in Sources */,
 				79F33F6A1E823EDD00634B9C /* SurveysViewController.swift in Sources */,
 				791311FC1E8505C3009D0064 /* SurveyViewController.swift in Sources */,
 				7959B1FD1E84D3F900F81327 /* Survey.swift in Sources */,
 				79F33F681E823EDD00634B9C /* AppDelegate.swift in Sources */,
 				79F33F9C1E8284A300634B9C /* InterfaceBuilderInstantiable.swift in Sources */,
 				79F33F981E827E9100634B9C /* UIImageExtensions.swift in Sources */,
+				791312001E8524D6009D0064 /* SurveysView.swift in Sources */,
 				79F33FA01E83D29B00634B9C /* SurveyApiClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

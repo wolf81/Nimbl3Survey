@@ -12,18 +12,21 @@ class SurveysViewController: UIViewController {
     @IBOutlet weak var refreshButton: UIBarButtonItem?
     @IBOutlet weak var menuButton: UIBarButtonItem?
     
-    private var surveyInfoView: SurveyInfoView {
-        return self.view as! SurveyInfoView
+    private var surveysInfoView: SurveysView {
+        return self.view as! SurveysView
     }
     
     override func loadView() {
-        self.view = SurveyInfoView.instantiateFromInterfaceBuilder()
+        self.view = SurveysView.instantiateFromInterfaceBuilder()
+//        self.view = SurveyInfoView.instantiateFromInterfaceBuilder()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.surveyInfoView.delegate = self
+        self.extendedLayoutIncludesOpaqueBars = false
+        self.edgesForExtendedLayout = []
+//        self.surveyInfoView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,7 +68,7 @@ class SurveysViewController: UIViewController {
             return
         }
         
-        self.surveyInfoView.updateWithSurvey(survey)
+//        self.surveyInfoView.updateWithSurvey(survey)
     }
 }
 
