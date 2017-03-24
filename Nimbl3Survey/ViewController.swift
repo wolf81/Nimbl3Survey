@@ -12,6 +12,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var refreshButton: UIBarButtonItem?
     @IBOutlet weak var menuButton: UIBarButtonItem?
     
+    private var surveyInfoView: SurveyInfoView {
+        return self.view as! SurveyInfoView
+    }
+    
     override func loadView() {
         self.view = SurveyInfoView.instantiateFromInterfaceBuilder()
     }
@@ -33,6 +37,13 @@ class ViewController: UIViewController {
     
     @IBAction func menuAction() {
         print("perform menu action")
+    }
+    
+    
+    // MARK: - Public
+    
+    func updateWithSurvey(_ survey: Survey) {
+        self.surveyInfoView.updateWithSurvey(survey)
     }
 }
 

@@ -1,3 +1,18 @@
-PODFILE CHECKSUM: 8671e0ab34d147a98264daca7c9989b38c921faa
+PODS:
+  - Alamofire (4.4.0)
+  - AlamofireImage (3.2.0):
+    - Alamofire (~> 4.1)
+  - p2.OAuth2 (3.0.3)
+
+DEPENDENCIES:
+  - AlamofireImage
+  - p2.OAuth2 (~> 3.0)
+
+SPEC CHECKSUMS:
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
+  p2.OAuth2: 63d8d3e366ac2c43bfe8bfa13b42cfeb908c314e
+
+PODFILE CHECKSUM: 8095ca9297600d038256cd0091d1b752f22bfd6d
 
 COCOAPODS: 1.2.0.beta.3
