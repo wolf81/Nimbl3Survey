@@ -23,10 +23,16 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="count">
-                            <integer key="value" value="5"/>
+                            <integer key="value" value="0"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="index">
-                            <integer key="value" value="1"/>
+                            <integer key="value" value="0"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="indicatorColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                            <real key="value" value="1.5"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -44,6 +50,10 @@
                 <constraint firstAttribute="bottom" secondItem="av1-5k-QT4" secondAttribute="bottom" constant="20" id="kZI-xl-4Fc"/>
                 <constraint firstAttribute="bottom" secondItem="0oR-X5-Phf" secondAttribute="bottom" id="lL9-sn-w3j"/>
             </constraints>
+            <connections>
+                <outlet property="pageIndicatorView" destination="av1-5k-QT4" id="fbk-EH-AQO"/>
+                <outlet property="scrollView" destination="0oR-X5-Phf" id="rwG-9N-F6S"/>
+            </connections>
             <point key="canvasLocation" x="33" y="56"/>
         </view>
     </objects>

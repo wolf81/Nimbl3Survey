@@ -12,7 +12,13 @@ class SurveysView: UIView, InterfaceBuilderInstantiable {
     @IBOutlet weak var scrollView: UIScrollView?
     @IBOutlet weak var pageIndicatorView: PageIndicatorView?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    // MARK: - Public
+    
+    func updateWithSurveys(_ surveys: [Survey]) {
+        let height = CGFloat(max(1, surveys.count)) * self.bounds.height
+        let width = self.bounds.width
+        
+        self.scrollView?.contentSize = CGSize(width: width, height: height)        
+        self.pageIndicatorView?.count = surveys.count
     }
 }

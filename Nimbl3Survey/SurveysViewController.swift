@@ -64,11 +64,7 @@ class SurveysViewController: UIViewController {
     // MARK: - Public
     
     func updateWithSurveys(_ surveys: [Survey]) {
-        guard let survey = surveys.first else {
-            return
-        }
-        
-//        self.surveyInfoView.updateWithSurvey(survey)
+        self.surveysInfoView.updateWithSurveys(surveys)
     }
 }
 
