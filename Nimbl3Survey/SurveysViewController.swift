@@ -64,14 +64,24 @@ class SurveysViewController: UIPageViewController {
         self.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if self.surveyViewControllers.count == 0 {
+            refreshAction()
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         let bounds = self.view.bounds
         
         if let indicatorView = self.pageIndicatorView {
             let margin: CGFloat = 10
-            let viewSize = indicatorView.sizeThatFits(bounds.size)
+            let maxHeight = bounds.height - margin * 2
+            let sizeConstraint = CGSize(width: bounds.width, height: maxHeight)
+            let viewSize = indicatorView.sizeThatFits(sizeConstraint)
             let x = bounds.width - viewSize.width - margin
-            indicatorView.frame = CGRect(x: x, y: 0, width: viewSize.width, height: viewSize.height)
+            indicatorView.frame = CGRect(x: x, y: margin, width: viewSize.width, height: viewSize.height)
         }
         
         super.viewDidLayoutSubviews()

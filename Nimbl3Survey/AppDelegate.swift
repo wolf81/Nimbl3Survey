@@ -53,9 +53,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Private
     
     private func configureAppearance() {
-        UINavigationBar.appearance().barTintColor = UIColor(red: 20.0 / 255, green: 30.0 / 255, blue: 50.0 / 255, alpha: 1.0)
+        let bgColor = UIColor(red: 20.0 / 255, green: 30.0 / 255, blue: 50.0 / 255, alpha: 1.0)
+        UINavigationBar.appearance().barTintColor = bgColor
         UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        UIView.appearance().backgroundColor = bgColor
+        UILabel.appearance().backgroundColor = .clear
     }
 }
 

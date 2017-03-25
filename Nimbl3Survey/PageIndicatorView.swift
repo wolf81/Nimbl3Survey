@@ -10,7 +10,7 @@ import UIKit
 import GLKit
 
 class PageIndicatorView: UIControl {
-    
+
     // MARK: - Initialization
     
     required init?(coder aDecoder: NSCoder) {
@@ -26,10 +26,17 @@ class PageIndicatorView: UIControl {
     }
     
     private func commonInit() {
-        self.backgroundColor = .clear        
+        self.backgroundColor = UIColor(white: 0, alpha: 0)
+        self.layer.masksToBounds = true
     }
     
     // MARK: - Properties
+    
+    override var frame: CGRect {
+        didSet {
+            self.layer.cornerRadius = fmin(bounds.width / 2, 10)
+        }
+    }
     
     var count: Int = NSNotFound {
         didSet {
@@ -70,6 +77,12 @@ class PageIndicatorView: UIControl {
         ctx.saveGState()
 
         ctx.clear(rect)
+
+        if (self.isSelected || self.isHighlighted) {
+            let bgColor = UIColor(white: 0, alpha: 0.5)
+            ctx.setFillColor(bgColor.cgColor)
+            ctx.fill(rect)
+        }
         
         let lineWidth: CGFloat = 2
         let margin: CGFloat = 10
@@ -104,6 +117,30 @@ class PageIndicatorView: UIControl {
         return CGSize(width: width, height: size.height)
     }
     
+    // MARK: - State changes
+    
+    override var isSelected: Bool {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+
+    // MARK: - User interaction
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        
+        // TODO: When user touch, immediately navigate to the nearest page
+        //  Perhaps create a list of rects for circles and send touched index
+        //  back through a delegate.
+    }
+
     // MARK: - Private
     
     private func drawCircleInContext(_ ctx: CGContext, atOrigin origin: CGPoint, withRadius radius: CGFloat, fill: Bool) {

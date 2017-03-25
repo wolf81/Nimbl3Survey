@@ -36,7 +36,7 @@ class Survey {
         
         self.title = title
         self.description = description
-        self.imageUrl = URL(string: coverImageUrlString)!        
+        self.imageUrl = URL(string: coverImageUrlString.appending("l"))!
         self.theme = Theme(json: themeJson)
     }
 }
