@@ -14,7 +14,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-                
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let viewController = SurveysViewController(transitionStyle: .scroll, navigationOrientation: .vertical)
+        let navController = UINavigationController(rootViewController: viewController)
+        self.window?.rootViewController = navController
+        
+        self.window?.makeKeyAndVisible()
+        
+        configureAppearance()
+        
         return true
     }
 
@@ -38,6 +48,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    // MARK: - Private
+    
+    private func configureAppearance() {
+        let bgColor = UIColor(red: 20.0 / 255, green: 30.0 / 255, blue: 50.0 / 255, alpha: 1.0)
+        UINavigationBar.appearance().barTintColor = bgColor
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        UIView.appearance().backgroundColor = bgColor
+        UILabel.appearance().backgroundColor = .clear
     }
 }
 

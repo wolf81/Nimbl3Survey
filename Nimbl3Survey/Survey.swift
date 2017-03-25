@@ -23,17 +23,20 @@ class Survey {
     let title: String
     let description: String
     let imageUrl: URL
+    let theme: Theme
     
     init(json: [String: AnyObject]) throws {
         guard
             let title = json["title"] as? String,
             let description = json["description"] as? String,
-            let coverImageUrlString = json["cover_image_url"] as? String else {
+            let coverImageUrlString = json["cover_image_url"] as? String,
+            let themeJson = json["theme"] as? [String: AnyObject] else {
                 throw SurveyError.invalidJson(json: json)
         }
         
         self.title = title
         self.description = description
-        self.imageUrl = URL(string: coverImageUrlString)!
+        self.imageUrl = URL(string: coverImageUrlString.appending("l"))!
+        self.theme = Theme(json: themeJson)
     }
 }

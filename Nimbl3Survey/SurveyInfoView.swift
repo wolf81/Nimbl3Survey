@@ -20,6 +20,7 @@ class SurveyInfoView: UIView, InterfaceBuilderInstantiable {
     @IBOutlet weak var descriptionLabel: UILabel?
     @IBOutlet weak var surveyButton: UIButton?
     @IBOutlet weak var imageView: UIImageView?
+    @IBOutlet weak var overlayView: UIView?
 
     private(set) var survey: Survey? {
         didSet {
@@ -60,5 +61,18 @@ class SurveyInfoView: UIView, InterfaceBuilderInstantiable {
 
     func updateWithSurvey(_ survey: Survey) {
         self.survey = survey
+        
+        applyTheme(survey.theme)
+    }
+    
+    // MARK: - Private
+    
+    private func applyTheme(_ theme: Theme) {
+        let bgImage = UIImage.from(color: theme.activeColor)
+        surveyButton?.setBackgroundImage(bgImage, for: .normal)
+        surveyButton?.setTitleColor(theme.questionColor, for: .normal)
+        
+        self.descriptionLabel?.textColor = theme.questionColor
+        self.titleLabel?.textColor = theme.questionColor
     }
 }
