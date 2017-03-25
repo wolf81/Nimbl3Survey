@@ -9,7 +9,10 @@
 import UIKit
 import GLKit
 
-@IBDesignable class PageIndicatorView: UIControl {
+class PageIndicatorView: UIControl {
+    
+    // MARK: - Initialization
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
@@ -26,37 +29,34 @@ import GLKit
         self.backgroundColor = .clear        
     }
     
-    @IBInspectable var count: Int = NSNotFound {
+    // MARK: - Properties
+    
+    var count: Int = NSNotFound {
         didSet {
             self.index = 0
             setNeedsDisplay()
         }
     }
     
-    @IBInspectable var index: Int = NSNotFound {
+    var index: Int = NSNotFound {
         didSet {
             setNeedsDisplay()
         }
     }
     
-    @IBInspectable var indicatorColor: UIColor = UIColor.white {
+    var indicatorColor: UIColor = UIColor.white {
         didSet {
             setNeedsDisplay()
         }
     }
     
-    @IBInspectable var lineWidth: CGFloat = 2 {
+    var lineWidth: CGFloat = 2 {
         didSet {
             setNeedsDisplay()
         }
     }
     
-    override func prepareForInterfaceBuilder() {
-        super.prepareForInterfaceBuilder()
-        
-        self.backgroundColor = .clear
-        self.count = 5
-    }
+    // MARK: - Drawing
 
     override func draw(_ rect: CGRect) {
         guard self.count != NSNotFound else {
@@ -89,7 +89,7 @@ import GLKit
             let origin = CGPoint(x: x, y: y)
             let fill = (i == self.index)
             
-            drawCircleAtOrigin(origin, radius: r, fill: fill, inContext: ctx)
+            drawCircleInContext(ctx, atOrigin: origin, withRadius: r, fill: fill)
 
             y += (h + margin)
         }
@@ -97,9 +97,16 @@ import GLKit
         ctx.restoreGState()
     }
     
+    // MARK: - Layout
+    
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        let width = min(16, size.width)
+        return CGSize(width: width, height: size.height)
+    }
+    
     // MARK: - Private
     
-    private func drawCircleAtOrigin(_ origin: CGPoint, radius: CGFloat, fill: Bool, inContext ctx: CGContext) {
+    private func drawCircleInContext(_ ctx: CGContext, atOrigin origin: CGPoint, withRadius radius: CGFloat, fill: Bool) {
         let endAngle = CGFloat(GLKMathDegreesToRadians(360))
         ctx.addArc(center: origin, radius: radius, startAngle: 0, endAngle: endAngle, clockwise: true)
 

@@ -14,7 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-                
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let viewController = SurveysViewController(transitionStyle: .scroll, navigationOrientation: .vertical)
+        let navController = UINavigationController(rootViewController: viewController)
+        self.window?.rootViewController = navController
+        
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
 
