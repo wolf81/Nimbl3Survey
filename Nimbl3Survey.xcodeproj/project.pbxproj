@@ -138,7 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				7913120A1E863115009D0064 /* SurveysViewController */,
-				7913120B1E863124009D0064 /* SurveyViewController */,
+				7913120B1E863124009D0064 /* SurveyInfoViewController */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -151,14 +151,14 @@
 			name = SurveysViewController;
 			sourceTree = "<group>";
 		};
-		7913120B1E863124009D0064 /* SurveyViewController */ = {
+		7913120B1E863124009D0064 /* SurveyInfoViewController */ = {
 			isa = PBXGroup;
 			children = (
 				791311FB1E8505C3009D0064 /* SurveyViewController.swift */,
 				79F33F991E82812E00634B9C /* SurveyInfoView.xib */,
 				79F33F951E82619200634B9C /* SurveyInfoView.swift */,
 			);
-			name = SurveyViewController;
+			name = SurveyInfoViewController;
 			sourceTree = "<group>";
 		};
 		7959B1FB1E84D3E700F81327 /* Model */ = {

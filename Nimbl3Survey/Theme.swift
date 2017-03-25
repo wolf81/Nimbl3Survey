@@ -8,14 +8,6 @@
 
 import UIKit
 
-/*
-"color_active": "#9B2828",
-"color_inactive": "#000000",
-"color_question": "#ffffff",
-"color_answer_normal": "#FFFFFF",
-"color_answer_inactive": "#FFFFFF"
- */
-
 class Theme {
     private(set) var activeColor: UIColor = UIColor.white
     private(set) var inactiveColor: UIColor = UIColor.white
