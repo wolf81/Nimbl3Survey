@@ -47,16 +47,14 @@ class SurveysViewController: UIPageViewController {
         self.title = "Surveys"
         self.extendedLayoutIncludesOpaqueBars = false
         self.edgesForExtendedLayout = []
-        
+                
         let refreshImage = UIImage(named: "refresh")?.withRenderingMode(.alwaysTemplate)
         self.refreshButton = UIBarButtonItem(image: refreshImage, style: .plain, target: self, action: #selector(refreshAction))
         self.navigationItem.leftBarButtonItem = self.refreshButton
-        self.refreshButton?.tintColor = .black
         
         let menuImage = UIImage(named: "menu")?.withRenderingMode(.alwaysTemplate)
         self.menuButton = UIBarButtonItem(image: menuImage, style: .plain, target: self, action: #selector(menuAction))
         self.navigationItem.rightBarButtonItem = self.menuButton
-        self.menuButton?.tintColor = .black
 
         let pageIndicatorView = PageIndicatorView()
         self.view.addSubview(pageIndicatorView);

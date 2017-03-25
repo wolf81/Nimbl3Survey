@@ -23,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window?.makeKeyAndVisible()
         
+        configureAppearance()
+        
         return true
     }
 
@@ -46,6 +48,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    // MARK: - Private
+    
+    private func configureAppearance() {
+        UINavigationBar.appearance().barTintColor = UIColor(red: 20.0 / 255, green: 30.0 / 255, blue: 50.0 / 255, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
     }
 }
 

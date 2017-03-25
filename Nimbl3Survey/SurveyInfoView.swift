@@ -60,5 +60,18 @@ class SurveyInfoView: UIView, InterfaceBuilderInstantiable {
 
     func updateWithSurvey(_ survey: Survey) {
         self.survey = survey
+        
+        applyTheme(survey.theme)
+    }
+    
+    // MARK: - Private
+    
+    private func applyTheme(_ theme: Theme) {
+        let bgImage = UIImage.from(color: theme.activeColor)
+        surveyButton?.setBackgroundImage(bgImage, for: .normal)
+        surveyButton?.setTitleColor(theme.questionColor, for: .normal)
+        
+        self.descriptionLabel?.textColor = theme.questionColor
+        self.titleLabel?.textColor = theme.questionColor
     }
 }
