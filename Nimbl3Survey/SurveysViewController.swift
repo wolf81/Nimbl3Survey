@@ -14,15 +14,23 @@ class SurveysViewController: UIPageViewController {
     
     fileprivate var pageIndicatorView: PageIndicatorView?
 
-    private(set) var surveyViewControllers = [UIViewController]()
+    private(set) var surveyViewControllers = [UIViewController]() {
+        didSet {
+            self.pageIndicatorView?.count = self.surveyViewControllers.count
+
+            if let viewController = self.surveyViewControllers.first {
+                self.setViewControllers([viewController], direction: .forward, animated: true, completion: nil)
+            } else {
+                self.setViewControllers([UIViewController()], direction: .reverse, animated: true, completion: nil)
+            }
+        }
+    }
 
     @IBAction func refreshAction() {
-        print("perform refresh action")
-        
         self.refreshButton?.isEnabled = false
         
         do {
-            try SurveyApiClient.shared.loadSurveys(page: 1, count: 3, completion: { (result, error) in
+            try SurveyApiClient.shared.loadSurveys(page: 1, count: 5, completion: { (result, error) in
                 self.refreshButton?.isEnabled = true
                 
                 guard let surveys = result else {
@@ -45,9 +53,9 @@ class SurveysViewController: UIPageViewController {
         super.viewDidLoad()
 
         self.title = "Surveys"
-        self.extendedLayoutIncludesOpaqueBars = false
-        self.edgesForExtendedLayout = []
-                
+        
+        self.view.backgroundColor = AppTheme.backgroundColor
+        
         let refreshImage = UIImage(named: "refresh")?.withRenderingMode(.alwaysTemplate)
         self.refreshButton = UIBarButtonItem(image: refreshImage, style: .plain, target: self, action: #selector(refreshAction))
         self.navigationItem.leftBarButtonItem = self.refreshButton
@@ -87,6 +95,12 @@ class SurveysViewController: UIPageViewController {
         super.viewDidLayoutSubviews()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        self.surveyViewControllers = []
+    }
+    
     // MARK: - Public
     
     func updateWithSurveys(_ surveys: [Survey]) {
@@ -96,10 +110,6 @@ class SurveysViewController: UIPageViewController {
             viewControllers.append(viewController)
         }
         self.surveyViewControllers = viewControllers
-
-        self.pageIndicatorView?.count = viewControllers.count
-        
-        self.setViewControllers([viewControllers.first!], direction: .forward, animated: true, completion: nil)
     }
 }
 

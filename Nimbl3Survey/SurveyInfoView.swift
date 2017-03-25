@@ -28,7 +28,9 @@ class SurveyInfoView: UIView, InterfaceBuilderInstantiable {
             self.descriptionLabel?.text = self.survey?.description
             
             if let imageUrl = self.survey?.imageUrl {
-                self.imageView?.af_setImage(withURL: imageUrl)
+                self.imageView?.af_setImage(withURL: imageUrl, placeholderImage: nil, filter: nil, progress: nil, progressQueue: DispatchQueue.main, imageTransition: .crossDissolve(0.5), runImageTransitionIfCached: true, completion: { response in
+                    
+                })
             } else {
                 self.imageView?.image = nil
             }
