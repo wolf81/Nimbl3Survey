@@ -18,6 +18,10 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gmB-7O-3eq">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                 </imageView>
+                <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hRj-rY-uVl">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eG-nh-Wb3">
                     <rect key="frame" x="20" y="97" width="280" height="48"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
@@ -25,18 +29,18 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEe-bZ-vJ0">
-                    <rect key="frame" x="20" y="168" width="280" height="26.5"/>
+                    <rect key="frame" x="20" y="168" width="280" height="27"/>
                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYh-eN-Iui">
-                    <rect key="frame" x="75.5" y="396" width="170" height="44"/>
+                    <rect key="frame" x="75" y="396" width="170" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="170" id="CHf-jT-Zfe"/>
                         <constraint firstAttribute="height" constant="44" id="XkF-62-E5W"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" title="Take the survey">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -48,15 +52,19 @@
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="2eG-nh-Wb3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="97" id="1hS-kE-zOn"/>
+                <constraint firstItem="hRj-rY-uVl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="3hT-ew-Oe0"/>
                 <constraint firstItem="2eG-nh-Wb3" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="6ca-d1-UZa"/>
                 <constraint firstItem="2eG-nh-Wb3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="7ld-ch-vPH"/>
+                <constraint firstAttribute="bottom" secondItem="hRj-rY-uVl" secondAttribute="bottom" id="D30-9V-S9c"/>
                 <constraint firstAttribute="trailing" secondItem="2eG-nh-Wb3" secondAttribute="trailing" constant="20" id="Ddp-L7-s6s"/>
                 <constraint firstAttribute="bottom" secondItem="gmB-7O-3eq" secondAttribute="bottom" id="G97-Di-1XU"/>
                 <constraint firstItem="gmB-7O-3eq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Jd8-9d-fta"/>
                 <constraint firstAttribute="bottom" secondItem="zYh-eN-Iui" secondAttribute="bottom" constant="40" id="KTh-FT-9VQ"/>
+                <constraint firstAttribute="trailing" secondItem="hRj-rY-uVl" secondAttribute="trailing" id="Q72-4d-uVq"/>
                 <constraint firstAttribute="trailing" secondItem="dEe-bZ-vJ0" secondAttribute="trailing" constant="20" id="RTz-fw-ysi"/>
                 <constraint firstItem="gmB-7O-3eq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YXi-MK-8Zq"/>
                 <constraint firstAttribute="trailing" secondItem="gmB-7O-3eq" secondAttribute="trailing" id="bvE-6K-xyS"/>
+                <constraint firstItem="hRj-rY-uVl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="o0g-PV-dcK"/>
                 <constraint firstItem="zYh-eN-Iui" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="oDl-hY-ieA"/>
                 <constraint firstItem="dEe-bZ-vJ0" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="u9g-E9-BnC"/>
                 <constraint firstItem="dEe-bZ-vJ0" firstAttribute="top" secondItem="2eG-nh-Wb3" secondAttribute="bottom" constant="23" id="usR-K1-jlB"/>
@@ -65,10 +73,11 @@
             <connections>
                 <outlet property="descriptionLabel" destination="dEe-bZ-vJ0" id="soL-CK-n5m"/>
                 <outlet property="imageView" destination="gmB-7O-3eq" id="CxS-uY-rNY"/>
+                <outlet property="overlayView" destination="hRj-rY-uVl" id="Qj5-S0-6fd"/>
                 <outlet property="surveyButton" destination="zYh-eN-Iui" id="NzP-DE-Pv3"/>
                 <outlet property="titleLabel" destination="2eG-nh-Wb3" id="zDR-Po-Pcf"/>
             </connections>
-            <point key="canvasLocation" x="33.5" y="53.5"/>
+            <point key="canvasLocation" x="33" y="53"/>
         </view>
     </objects>
 </document>

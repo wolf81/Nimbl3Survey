@@ -20,6 +20,7 @@ class SurveyInfoView: UIView, InterfaceBuilderInstantiable {
     @IBOutlet weak var descriptionLabel: UILabel?
     @IBOutlet weak var surveyButton: UIButton?
     @IBOutlet weak var imageView: UIImageView?
+    @IBOutlet weak var overlayView: UIView?
 
     private(set) var survey: Survey? {
         didSet {
