@@ -53,12 +53,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Private
     
     private func configureAppearance() {
-        let bgColor = UIColor(red: 20.0 / 255, green: 30.0 / 255, blue: 50.0 / 255, alpha: 1.0)
-        UINavigationBar.appearance().barTintColor = bgColor
-        UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-        UIView.appearance().backgroundColor = bgColor
+        UINavigationBar.appearance().barTintColor = AppTheme.backgroundColor
+        UINavigationBar.appearance().tintColor = AppTheme.foregroundColor
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: AppTheme.foregroundColor]
         UILabel.appearance().backgroundColor = .clear
+        
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().backgroundColor = AppTheme.backgroundColor.withAlphaComponent(0.5)
+        UINavigationBar.appearance().isTranslucent = true
     }
 }
 

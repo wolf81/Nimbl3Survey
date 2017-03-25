@@ -14,40 +14,35 @@ class SurveysViewController: UIPageViewController {
     
     fileprivate var pageIndicatorView: PageIndicatorView?
 
-    private(set) var surveyViewControllers = [UIViewController]()
+    private(set) var pageViewControllers = [UIViewController]() {
+        didSet {
+            self.pageIndicatorView?.count = self.pageViewControllers.count
 
-    @IBAction func refreshAction() {
-        print("perform refresh action")
-        
-        self.refreshButton?.isEnabled = false
-        
-        do {
-            try SurveyApiClient.shared.loadSurveys(page: 1, count: 3, completion: { (result, error) in
-                self.refreshButton?.isEnabled = true
-                
-                guard let surveys = result else {
-                    // TODO: Show error.
-                    return
-                }
-                
-                self.updateWithSurveys(surveys)
-            })
-        } catch let error {
-            print("error: \(error)")
+            if let viewController = self.pageViewControllers.first {
+                self.setViewControllers([viewController], direction: .forward, animated: true, completion: nil)
+            } else {
+                self.setViewControllers([UIViewController()], direction: .reverse, animated: true, completion: nil)
+            }
         }
     }
+
+    // MARK: - Initialization & clean-up
     
-    @IBAction func menuAction() {
-        print("perform menu action")
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        self.pageViewControllers = []
     }
+    
+    // MARK: - View lifecycle
   
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = "Surveys"
-        self.extendedLayoutIncludesOpaqueBars = false
-        self.edgesForExtendedLayout = []
-                
+        
+        self.view.backgroundColor = AppTheme.backgroundColor
+        
         let refreshImage = UIImage(named: "refresh")?.withRenderingMode(.alwaysTemplate)
         self.refreshButton = UIBarButtonItem(image: refreshImage, style: .plain, target: self, action: #selector(refreshAction))
         self.navigationItem.leftBarButtonItem = self.refreshButton
@@ -67,7 +62,7 @@ class SurveysViewController: UIPageViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if self.surveyViewControllers.count == 0 {
+        if self.pageViewControllers.count == 0 {
             refreshAction()
         }
     }
@@ -87,27 +82,50 @@ class SurveysViewController: UIPageViewController {
         super.viewDidLayoutSubviews()
     }
     
+    // MARK: - Actions
+    
+    @IBAction func refreshAction() {
+        self.refreshButton?.isEnabled = false
+        
+        do {
+            try SurveyApiClient.shared.loadSurveys(page: 1, count: 5, completion: { (result, error) in
+                self.refreshButton?.isEnabled = true
+                
+                guard let surveys = result else {
+                    // TODO: Show error.
+                    return
+                }
+                
+                self.updateWithSurveys(surveys)
+            })
+        } catch let error {
+            print("error: \(error)")
+        }
+    }
+    
+    @IBAction func menuAction() {
+        print("perform menu action")
+    }
+    
     // MARK: - Public
     
     func updateWithSurveys(_ surveys: [Survey]) {
         var viewControllers = [UIViewController]()
         for survey in surveys {
-            let viewController = SurveyViewController(survey: survey)
+            let viewController = SurveyInfoViewController(survey: survey)
             viewControllers.append(viewController)
         }
-        self.surveyViewControllers = viewControllers
-
-        self.pageIndicatorView?.count = viewControllers.count
-        
-        self.setViewControllers([viewControllers.first!], direction: .forward, animated: true, completion: nil)
+        self.pageViewControllers = viewControllers
     }
 }
+
+// MARK: - UIPageViewControllerDataSource
 
 extension SurveysViewController: UIPageViewControllerDataSource {
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        if let idx = self.surveyViewControllers.index(of: viewController), idx > 0 {
-            return self.surveyViewControllers[idx - 1]
+        if let idx = self.pageViewControllers.index(of: viewController), idx > 0 {
+            return self.pageViewControllers[idx - 1]
         }
         
         return nil
@@ -115,18 +133,20 @@ extension SurveysViewController: UIPageViewControllerDataSource {
 
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        if let idx = self.surveyViewControllers.index(of: viewController), (idx < surveyViewControllers.count - 1) {
-            return self.surveyViewControllers[idx + 1]
+        if let idx = self.pageViewControllers.index(of: viewController), (idx < pageViewControllers.count - 1) {
+            return self.pageViewControllers[idx + 1]
         }
 
         return nil
     }
 }
 
+// MARK: - UIPageViewControllerDelegate
+
 extension SurveysViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if let viewController = pageViewController.viewControllers?.first {
-            if let idx = self.surveyViewControllers.index(of: viewController) {
+            if let idx = self.pageViewControllers.index(of: viewController) {
                 self.pageIndicatorView?.index = idx
             }
         }

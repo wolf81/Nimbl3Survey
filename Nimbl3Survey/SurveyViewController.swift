@@ -1,5 +1,5 @@
 //
-//  SurveyViewController.swift
+//  SurveyInfoViewController.swift
 //  Nimbl3Survey
 //
 //  Created by Wolfgang Schreurs on 24/03/2017.
@@ -8,16 +8,14 @@
 
 import UIKit
 
-class SurveyViewController: UIViewController {
+class SurveyInfoViewController: UIViewController {
     let survey: Survey
-    
-    override func loadView() {
-        self.view = SurveyInfoView.instantiateFromInterfaceBuilder()
-    }
     
     var surveyInfoView: SurveyInfoView {
         return self.view as! SurveyInfoView
     }
+    
+    // MARK: - Initialization & clean-up
     
     init(survey: Survey) {
         self.survey = survey
@@ -28,7 +26,13 @@ class SurveyViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
+
+    // MARK: - View lifecycle
     
+    override func loadView() {
+        self.view = SurveyInfoView.instantiateFromInterfaceBuilder()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

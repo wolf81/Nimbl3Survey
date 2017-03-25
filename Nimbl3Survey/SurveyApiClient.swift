@@ -20,11 +20,9 @@ import Alamofire
 // actually perform a new authorization request if our access token in the 
 // keychain is still valid.
 
-// TODO 1: Add support for image loading. Automatically load high resolution
+// TODO: Consider support for image loading. Automatically load high resolution
 // images for supported devices. High resolution images can be loaded by 
 // appending "l" to the image URL.
-
-// TODO 2: Load theme as well and apply to the survey info screen.
 
 enum SurveyApiClientError: LocalizedError {
     case invalidHttpStatusCode(code: Int)
@@ -66,6 +64,10 @@ class SurveyApiClient {
         }
     }
     
+    // FIXME: It seems there might be some issues with the back-end. Parameters 
+    // for page index and count are currently ignored. The same result is 
+    // visible when using curl. For now it seems always the same 5 pages are 
+    // returned, regardless of the page index or count.
     func loadSurveys(page: Int = 1, count: Int = 10, completion: @escaping ((_ result: [Survey]?, _ error: Error?) -> Void)) throws {
         authorize { (success, error) in
             guard success == true else {
@@ -74,8 +76,8 @@ class SurveyApiClient {
             }
             
             let url = self.baseUrl.appendingPathComponent("surveys.json?page=\(page)&per_page=\(count)")
-            let req = (self.oauthClient?.request(forURL: url))!
-            let task = self.oauthClient?.session.dataTask(with: req) { data, response, error in
+            let request = (self.oauthClient?.request(forURL: url))!
+            let task = self.oauthClient?.session.dataTask(with: request) { data, response, error in
                 guard error == nil else {
                     DispatchQueue.main.async {
                         completion(nil, error!)
