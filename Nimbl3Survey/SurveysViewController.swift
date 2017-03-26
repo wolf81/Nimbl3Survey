@@ -112,6 +112,8 @@ class SurveysViewController: UIPageViewController {
         
         do {
             try SurveyApiClient.shared.loadSurveys(page: 1, count: 5, completion: { (result, error) in
+                self.loadingViewController?.stopLoading()
+                
                 guard let surveys = result else {
                     self.loadingViewController?.updateWithError(error)
                     self.updateNavigationItemsVisible(false)

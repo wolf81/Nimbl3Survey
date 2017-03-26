@@ -15,23 +15,20 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="9wb-yx-jpC">
-                    <rect key="frame" x="131.5" y="81.5" width="37" height="37"/>
-                </activityIndicatorView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YnH-nb-QGP">
-                    <rect key="frame" x="20" y="25" width="260" height="26.5"/>
+                    <rect key="frame" x="20" y="25" width="260" height="27"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Information" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uw2-DB-MZw">
-                    <rect key="frame" x="20" y="89.5" width="260" height="21"/>
+                    <rect key="frame" x="20" y="90" width="260" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PV1-v4-B4j">
-                    <rect key="frame" x="100" y="148.5" width="100" height="34"/>
+                    <rect key="frame" x="100" y="149" width="100" height="34"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="Tpq-bL-iQf"/>
                     </constraints>
@@ -43,24 +40,32 @@
                         <action selector="reloadAction" destination="zoF-JI-Fv2" eventType="touchUpInside" id="gxg-hv-yCb"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading" translatesAutoresizingMaskIntoConstraints="NO" id="evd-L2-ag7">
+                    <rect key="frame" x="125" y="75" width="50" height="50"/>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="a5c-Pv-2lB"/>
+                        <constraint firstAttribute="width" constant="50" id="pZV-la-JQD"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="evd-L2-ag7" firstAttribute="centerX" secondItem="zoF-JI-Fv2" secondAttribute="centerX" id="4K2-9T-0Iw"/>
                 <constraint firstAttribute="trailing" secondItem="uw2-DB-MZw" secondAttribute="trailing" constant="20" id="4tB-I9-wKG"/>
+                <constraint firstItem="evd-L2-ag7" firstAttribute="top" secondItem="YnH-nb-QGP" secondAttribute="bottom" constant="23.5" id="5dJ-95-AG9"/>
                 <constraint firstAttribute="trailing" secondItem="YnH-nb-QGP" secondAttribute="trailing" constant="20" id="5zq-hH-a56"/>
-                <constraint firstItem="9wb-yx-jpC" firstAttribute="centerX" secondItem="zoF-JI-Fv2" secondAttribute="centerX" id="7e5-1R-Zcs"/>
-                <constraint firstItem="9wb-yx-jpC" firstAttribute="top" secondItem="YnH-nb-QGP" secondAttribute="bottom" constant="30" id="7sr-Io-d69"/>
                 <constraint firstItem="uw2-DB-MZw" firstAttribute="leading" secondItem="zoF-JI-Fv2" secondAttribute="leading" constant="20" id="8JC-oB-RR3"/>
                 <constraint firstItem="uw2-DB-MZw" firstAttribute="centerX" secondItem="zoF-JI-Fv2" secondAttribute="centerX" id="QAi-Oo-VCr"/>
-                <constraint firstItem="9wb-yx-jpC" firstAttribute="centerY" secondItem="zoF-JI-Fv2" secondAttribute="centerY" id="a10-Cx-m85"/>
-                <constraint firstItem="PV1-v4-B4j" firstAttribute="top" secondItem="9wb-yx-jpC" secondAttribute="bottom" constant="30" id="i9b-6D-IZi"/>
+                <constraint firstItem="evd-L2-ag7" firstAttribute="centerY" secondItem="zoF-JI-Fv2" secondAttribute="centerY" id="kU2-1D-Mc2"/>
                 <constraint firstItem="YnH-nb-QGP" firstAttribute="leading" secondItem="zoF-JI-Fv2" secondAttribute="leading" constant="20" id="uIV-6G-brq"/>
                 <constraint firstItem="PV1-v4-B4j" firstAttribute="centerX" secondItem="zoF-JI-Fv2" secondAttribute="centerX" id="vrj-L6-D42"/>
+                <constraint firstItem="PV1-v4-B4j" firstAttribute="top" secondItem="evd-L2-ag7" secondAttribute="bottom" constant="23.5" id="yts-bq-N1g"/>
                 <constraint firstItem="uw2-DB-MZw" firstAttribute="centerY" secondItem="zoF-JI-Fv2" secondAttribute="centerY" id="ywo-tq-1fC"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="activityIndicator" destination="9wb-yx-jpC" id="J81-Ie-oVA"/>
+                <outlet property="imageView" destination="evd-L2-ag7" id="Zbf-T8-NIa"/>
                 <outlet property="infoLabel" destination="uw2-DB-MZw" id="gKc-Mw-fco"/>
                 <outlet property="reloadButton" destination="PV1-v4-B4j" id="YSn-Ak-3rh"/>
                 <outlet property="titleLabel" destination="YnH-nb-QGP" id="cFl-W0-Vzr"/>
@@ -68,4 +73,7 @@
             <point key="canvasLocation" x="151.5" y="-881"/>
         </view>
     </objects>
+    <resources>
+        <image name="loading" width="40" height="40"/>
+    </resources>
 </document>

@@ -17,7 +17,7 @@ class LoadingView: UIView, InterfaceBuilderInstantiable {
     
     var animationDuration: TimeInterval = 0.2
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView?
+    @IBOutlet weak var imageView: UIImageView?
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var infoLabel: UILabel?
     @IBOutlet weak var reloadButton: UIButton?
@@ -30,7 +30,9 @@ class LoadingView: UIView, InterfaceBuilderInstantiable {
         self.titleLabel?.alpha = 0.0
         self.reloadButton?.alpha = 0.0
         self.infoLabel?.alpha = 0.0
-        self.activityIndicator?.alpha = 0.0
+        self.imageView?.alpha = 0.0
+        
+        self.imageView?.tintColor = .white
     }
     
     // MARK: - Actions
@@ -44,12 +46,12 @@ class LoadingView: UIView, InterfaceBuilderInstantiable {
     func updateWithError(_ error: Error?) {
         self.titleLabel?.text = "Error"
         self.infoLabel?.text = error?.localizedDescription ?? "An unknown error occured."
-        self.activityIndicator?.stopAnimating()
+        self.imageView?.stopRotation()
 
         UIView.animate(withDuration: self.animationDuration, delay: 0, options: .beginFromCurrentState, animations: {
             self.titleLabel?.alpha = 1.0
             self.reloadButton?.alpha = 1.0
-            self.activityIndicator?.alpha = 0.0
+            self.imageView?.alpha = 0.0
             self.infoLabel?.alpha = 1.0
         }, completion: nil)
     }
@@ -57,17 +59,26 @@ class LoadingView: UIView, InterfaceBuilderInstantiable {
     func startLoading() {
         self.titleLabel?.text = "Loading ..."
         self.infoLabel?.text = nil
-        self.activityIndicator?.startAnimating()
+        self.imageView?.startRotation(2.0, repeatCount: Float.infinity, clockwise: true)
 
         UIView.animate(withDuration: self.animationDuration, delay: 0, options: .beginFromCurrentState, animations: {
             self.titleLabel?.alpha = 1.0
             self.reloadButton?.alpha = 0.0
-            self.activityIndicator?.alpha = 1.0
+            self.imageView?.alpha = 1.0
             self.infoLabel?.alpha = 0.0
         }, completion: nil)
     }
     
     func stopLoading() {
-        //
+        self.imageView?.stopRotation()
+        
+        UIView.animate(withDuration: self.animationDuration, delay: 0, options: .beginFromCurrentState, animations: {
+            self.titleLabel?.alpha = 1.0
+            self.reloadButton?.alpha = 1.0
+            self.imageView?.alpha = 0.0
+            self.infoLabel?.alpha = 1.0
+        }, completion: nil)
     }
+    
+    // MARK: - Private
 }

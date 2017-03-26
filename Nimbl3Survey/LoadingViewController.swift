@@ -40,6 +40,12 @@ class LoadingViewController: UIViewController {
         self.loadingView.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.loadingView.startLoading()
+    }
+    
     // MARK: Public
     
     func startLoading() {
@@ -48,6 +54,10 @@ class LoadingViewController: UIViewController {
     
     func updateWithError(_ error: Error?) {
         self.loadingView.updateWithError(error)
+    }
+    
+    func stopLoading() {
+        self.loadingView.stopLoading()
     }
 }
 
