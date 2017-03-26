@@ -14,6 +14,12 @@ class SurveysViewController: UIPageViewController {
     
     fileprivate var pageIndicatorView: PageIndicatorView?
 
+    fileprivate var currentPageIndex: Int = 0 {
+        didSet {
+            self.pageIndicatorView?.index = self.currentPageIndex
+        }
+    }
+
     private(set) var pageViewControllers = [UIViewController]() {
         didSet {
             self.pageIndicatorView?.count = self.pageViewControllers.count
@@ -23,6 +29,8 @@ class SurveysViewController: UIPageViewController {
             } else {
                 self.setViewControllers([UIViewController()], direction: .reverse, animated: true, completion: nil)
             }
+            
+            self.currentPageIndex = 0
         }
     }
 
@@ -54,6 +62,7 @@ class SurveysViewController: UIPageViewController {
         let pageIndicatorView = PageIndicatorView()
         self.view.addSubview(pageIndicatorView);
         self.pageIndicatorView = pageIndicatorView
+        self.pageIndicatorView?.delegate = self
         
         self.dataSource = self
         self.delegate = self
@@ -72,11 +81,12 @@ class SurveysViewController: UIPageViewController {
         
         if let indicatorView = self.pageIndicatorView {
             let margin: CGFloat = 10
-            let maxHeight = bounds.height - margin * 2
+            let maxHeight = bounds.height - margin * 2 - self.topLayoutGuide.length
             let sizeConstraint = CGSize(width: bounds.width, height: maxHeight)
             let viewSize = indicatorView.sizeThatFits(sizeConstraint)
             let x = bounds.width - viewSize.width - margin
-            indicatorView.frame = CGRect(x: x, y: margin, width: viewSize.width, height: viewSize.height)
+            let y = self.topLayoutGuide.length + margin
+            indicatorView.frame = CGRect(x: x, y: y, width: viewSize.width, height: viewSize.height)
         }
         
         super.viewDidLayoutSubviews()
@@ -105,6 +115,21 @@ class SurveysViewController: UIPageViewController {
     
     @IBAction func menuAction() {
         print("perform menu action")
+    }
+    
+    // MARK: - Private
+    
+    fileprivate func navigateToPageIndex(_ pageIndex: Int) {
+        guard (0 ..< self.pageViewControllers.count).contains(pageIndex) else {
+            return
+        }
+        
+        let direction: UIPageViewControllerNavigationDirection = pageIndex > self.currentPageIndex ? .forward : .reverse
+        
+        let nextViewController = self.pageViewControllers[pageIndex]
+        setViewControllers([nextViewController], direction: direction, animated: true) { finished in
+            self.currentPageIndex = pageIndex
+        }
     }
     
     // MARK: - Public
@@ -141,14 +166,32 @@ extension SurveysViewController: UIPageViewControllerDataSource {
     }
 }
 
+// MARK: - PageIndicatorViewDelegate
+
+extension SurveysViewController: PageIndicatorViewDelegate {
+    func pageIndicatorViewNavigateNextAction(_ view: PageIndicatorView) {
+        navigateToPageIndex(self.currentPageIndex - 1)
+    }
+    
+    func pageIndicatorViewNavigatePreviousAction(_ view: PageIndicatorView) {
+        navigateToPageIndex(self.currentPageIndex + 1)
+    }
+
+    func pageIndicatorView(_ view: PageIndicatorView, touchedIndicatorAtIndex index: Int) {
+        navigateToPageIndex(index)
+    }
+}
+
 // MARK: - UIPageViewControllerDelegate
 
 extension SurveysViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        if let viewController = pageViewController.viewControllers?.first {
-            if let idx = self.pageViewControllers.index(of: viewController) {
-                self.pageIndicatorView?.index = idx
-            }
+        guard completed == true else { return }
+        
+        guard let viewController = pageViewController.viewControllers?.first else {
+            return
         }
+        
+        self.currentPageIndex = self.pageViewControllers.index(of: viewController) ?? 0
     }
 }

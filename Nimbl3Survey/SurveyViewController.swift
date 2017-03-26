@@ -1,21 +1,15 @@
 //
-//  SurveyInfoViewController.swift
+//  SurveyViewController.swift
 //  Nimbl3Survey
 //
-//  Created by Wolfgang Schreurs on 24/03/2017.
+//  Created by Wolfgang Schreurs on 26/03/2017.
 //  Copyright © 2017 Wolftrail. All rights reserved.
 //
 
 import UIKit
 
-class SurveyInfoViewController: UIViewController {
-    let survey: Survey
-    
-    var surveyInfoView: SurveyInfoView {
-        return self.view as! SurveyInfoView
-    }
-    
-    // MARK: - Initialization & clean-up
+class SurveyViewController: UIViewController {
+    private(set) var survey: Survey
     
     init(survey: Survey) {
         self.survey = survey
@@ -26,16 +20,21 @@ class SurveyInfoViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
-
-    // MARK: - View lifecycle
     
-    override func loadView() {
-        self.view = SurveyInfoView.instantiateFromInterfaceBuilder()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.surveyInfoView.updateWithSurvey(survey)
+        self.title = "Survey"
+        
+        self.view.backgroundColor = self.survey.theme.activeColor
+
+        let downImage = UIImage(named: "chevron-down")
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: downImage, style: .plain, target: self, action: #selector(dismissAnimated))
+    }
+    
+    // MARK: - Private
+ 
+    dynamic private func dismissAnimated() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
