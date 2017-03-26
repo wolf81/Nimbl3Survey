@@ -12,7 +12,15 @@ class SurveysViewController: UIPageViewController {
     private var refreshButton: UIBarButtonItem?
     private var menuButton: UIBarButtonItem?
     
+    fileprivate var isNavigating: Bool = false
+
     fileprivate var pageIndicatorView: PageIndicatorView?
+
+    fileprivate var currentPageIndex: Int = 0 {
+        didSet {
+            self.pageIndicatorView?.index = self.currentPageIndex
+        }
+    }
 
     private(set) var pageViewControllers = [UIViewController]() {
         didSet {
@@ -23,6 +31,8 @@ class SurveysViewController: UIPageViewController {
             } else {
                 self.setViewControllers([UIViewController()], direction: .reverse, animated: true, completion: nil)
             }
+            
+            self.currentPageIndex = 0
         }
     }
 
@@ -54,6 +64,7 @@ class SurveysViewController: UIPageViewController {
         let pageIndicatorView = PageIndicatorView()
         self.view.addSubview(pageIndicatorView);
         self.pageIndicatorView = pageIndicatorView
+        self.pageIndicatorView?.delegate = self
         
         self.dataSource = self
         self.delegate = self
@@ -72,11 +83,12 @@ class SurveysViewController: UIPageViewController {
         
         if let indicatorView = self.pageIndicatorView {
             let margin: CGFloat = 10
-            let maxHeight = bounds.height - margin * 2
+            let maxHeight = bounds.height - margin * 2 - self.topLayoutGuide.length
             let sizeConstraint = CGSize(width: bounds.width, height: maxHeight)
             let viewSize = indicatorView.sizeThatFits(sizeConstraint)
             let x = bounds.width - viewSize.width - margin
-            indicatorView.frame = CGRect(x: x, y: margin, width: viewSize.width, height: viewSize.height)
+            let y = self.topLayoutGuide.length + margin
+            indicatorView.frame = CGRect(x: x, y: y, width: viewSize.width, height: viewSize.height)
         }
         
         super.viewDidLayoutSubviews()
@@ -105,6 +117,47 @@ class SurveysViewController: UIPageViewController {
     
     @IBAction func menuAction() {
         print("perform menu action")
+    }
+    
+    // MARK: - Private
+    
+    func navigateToPageAtIndex(_ pageIndex: Int) {
+        self.isNavigating = true
+
+        guard pageIndex != self.currentPageIndex else {
+            self.isNavigating = false
+            return
+        }
+        
+        var navDirection: UIPageViewControllerNavigationDirection
+        var nextPageIndex: Int
+        
+        switch self.currentPageIndex {
+        case _ where self.currentPageIndex > pageIndex:
+            navDirection = .reverse
+            nextPageIndex = self.currentPageIndex - 1
+        case _ where self.currentPageIndex < pageIndex:
+            navDirection = .forward
+            nextPageIndex = self.currentPageIndex + 1
+        default: return
+        }
+
+        let nextViewController = self.pageViewControllers[nextPageIndex]
+
+        setViewControllers([nextViewController], direction: navDirection, animated: true, completion: { [weak self] finished in
+            DispatchQueue.main.async {
+                guard let pvc = self else { return }
+                
+                // Prevent a caching bug by navigating again to the same view controller without animation.
+                pvc.setViewControllers([nextViewController], direction: navDirection, animated: false, completion: nil)
+                
+                if let currentPageIndex = pvc.pageViewControllers.index(of: nextViewController) {
+                    pvc.currentPageIndex = currentPageIndex
+                }
+                
+                pvc.navigateToPageAtIndex(pageIndex)
+            }
+        })
     }
     
     // MARK: - Public
@@ -141,14 +194,26 @@ extension SurveysViewController: UIPageViewControllerDataSource {
     }
 }
 
+// MARK: - PageIndicatorViewDelegate
+
+extension SurveysViewController: PageIndicatorViewDelegate {
+    func pageIndicatorView(_ view: PageIndicatorView, touchedIndicatorAtIndex index: Int) {
+        guard self.isNavigating == false else { return }
+
+        navigateToPageAtIndex(index)
+    }
+}
+
 // MARK: - UIPageViewControllerDelegate
 
 extension SurveysViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        if let viewController = pageViewController.viewControllers?.first {
-            if let idx = self.pageViewControllers.index(of: viewController) {
-                self.pageIndicatorView?.index = idx
-            }
+        guard completed == true else { return }
+        
+        guard let viewController = pageViewController.viewControllers?.first else {
+            return
         }
+        
+        self.currentPageIndex = self.pageViewControllers.index(of: viewController) ?? 0
     }
 }

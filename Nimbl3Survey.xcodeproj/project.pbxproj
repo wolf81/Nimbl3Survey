@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		255707A77961A1A75E8FBDD8 /* Pods_Nimbl3Survey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC9FA8A3BA5CDF788ED20849 /* Pods_Nimbl3Survey.framework */; };
-		791311FC1E8505C3009D0064 /* SurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791311FB1E8505C3009D0064 /* SurveyViewController.swift */; };
+		791311FC1E8505C3009D0064 /* SurveyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791311FB1E8505C3009D0064 /* SurveyInfoViewController.swift */; };
 		791311FE1E852141009D0064 /* PageIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791311FD1E852141009D0064 /* PageIndicatorView.swift */; };
 		791312041E86093F009D0064 /* SurveysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791312031E86093F009D0064 /* SurveysViewController.swift */; };
 		7913120D1E863BC5009D0064 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7913120C1E863BC5009D0064 /* Theme.swift */; };
 		7913120F1E863C62009D0064 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7913120E1E863C62009D0064 /* UIColorExtensions.swift */; };
 		791312111E86776F009D0064 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791312101E86776F009D0064 /* Constants.swift */; };
+		791312151E875832009D0064 /* UIPageControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791312141E875832009D0064 /* UIPageControllerExtensions.swift */; };
 		7959B1FD1E84D3F900F81327 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7959B1FC1E84D3F900F81327 /* Survey.swift */; };
 		79F33F681E823EDD00634B9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F33F671E823EDD00634B9C /* AppDelegate.swift */; };
 		79F33F6F1E823EDD00634B9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79F33F6E1E823EDD00634B9C /* Assets.xcassets */; };
@@ -46,12 +47,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		791311FB1E8505C3009D0064 /* SurveyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyViewController.swift; sourceTree = "<group>"; };
+		791311FB1E8505C3009D0064 /* SurveyInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyInfoViewController.swift; sourceTree = "<group>"; };
 		791311FD1E852141009D0064 /* PageIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIndicatorView.swift; sourceTree = "<group>"; };
 		791312031E86093F009D0064 /* SurveysViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveysViewController.swift; sourceTree = "<group>"; };
 		7913120C1E863BC5009D0064 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		7913120E1E863C62009D0064 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		791312101E86776F009D0064 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		791312141E875832009D0064 /* UIPageControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPageControllerExtensions.swift; sourceTree = "<group>"; };
 		7959B1FC1E84D3F900F81327 /* Survey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
 		79F33F641E823EDD00634B9C /* Nimbl3Survey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nimbl3Survey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79F33F671E823EDD00634B9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			children = (
 				79F33F971E827E9100634B9C /* UIImageExtensions.swift */,
 				7913120E1E863C62009D0064 /* UIColorExtensions.swift */,
+				791312141E875832009D0064 /* UIPageControllerExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -154,7 +157,7 @@
 		7913120B1E863124009D0064 /* SurveyInfoViewController */ = {
 			isa = PBXGroup;
 			children = (
-				791311FB1E8505C3009D0064 /* SurveyViewController.swift */,
+				791311FB1E8505C3009D0064 /* SurveyInfoViewController.swift */,
 				79F33F991E82812E00634B9C /* SurveyInfoView.xib */,
 				79F33F951E82619200634B9C /* SurveyInfoView.swift */,
 			);
@@ -429,11 +432,12 @@
 			files = (
 				79F33F961E82619200634B9C /* SurveyInfoView.swift in Sources */,
 				791311FE1E852141009D0064 /* PageIndicatorView.swift in Sources */,
-				791311FC1E8505C3009D0064 /* SurveyViewController.swift in Sources */,
+				791311FC1E8505C3009D0064 /* SurveyInfoViewController.swift in Sources */,
 				7959B1FD1E84D3F900F81327 /* Survey.swift in Sources */,
 				79F33F681E823EDD00634B9C /* AppDelegate.swift in Sources */,
 				79F33F9C1E8284A300634B9C /* InterfaceBuilderInstantiable.swift in Sources */,
 				7913120F1E863C62009D0064 /* UIColorExtensions.swift in Sources */,
+				791312151E875832009D0064 /* UIPageControllerExtensions.swift in Sources */,
 				79F33F981E827E9100634B9C /* UIImageExtensions.swift in Sources */,
 				7913120D1E863BC5009D0064 /* Theme.swift in Sources */,
 				791312041E86093F009D0064 /* SurveysViewController.swift in Sources */,

@@ -9,8 +9,17 @@
 import UIKit
 import GLKit
 
-class PageIndicatorView: UIControl {
+protocol PageIndicatorViewDelegate: class {
+    func pageIndicatorView(_ view: PageIndicatorView, touchedIndicatorAtIndex index: Int)
+}
 
+class PageIndicatorView: UIControl {
+    private let horizontalMargin: CGFloat = 2
+    
+    weak var delegate: PageIndicatorViewDelegate?
+    
+    private var indicatorTouchRects = [CGRect]()
+    
     // MARK: - Initialization
     
     required init?(coder aDecoder: NSCoder) {
@@ -78,24 +87,28 @@ class PageIndicatorView: UIControl {
 
         ctx.clear(rect)
 
-        if (self.isSelected || self.isHighlighted) {
-            let bgColor = UIColor(white: 0, alpha: 0.5)
-            ctx.setFillColor(bgColor.cgColor)
+        let highlighted = (self.isSelected || self.isHighlighted)
+        
+        if highlighted {
+            let backgroundColor = UIColor(white: 0, alpha: 0.5)
+            ctx.setFillColor(backgroundColor.cgColor)
             ctx.fill(rect)
         }
         
         let lineWidth: CGFloat = 2
-        let margin: CGFloat = 10
+        let verticalMargin: CGFloat = 10
         
-        ctx.setFillColor(self.indicatorColor.cgColor)
-        ctx.setStrokeColor(self.indicatorColor.cgColor)
+        let foregroundColor = highlighted ? self.indicatorColor.withAlphaComponent(0.5) : self.indicatorColor
+        
+        ctx.setFillColor(foregroundColor.cgColor)
+        ctx.setStrokeColor(foregroundColor.cgColor)
         ctx.setLineWidth(self.lineWidth)
         
         let x: CGFloat = (rect.origin.x + (rect.width / 2))
-        let r: CGFloat = (rect.width / 2) - lineWidth
-        let h = (rect.width - lineWidth)
+        let r: CGFloat = (rect.width / 2) - lineWidth - self.horizontalMargin
+        let h = (rect.width - lineWidth - (self.horizontalMargin * 2))
         
-        let totalHeight = CGFloat(self.count) * h + fmax(CGFloat((self.count - 1)), CGFloat(0)) * margin
+        let totalHeight = CGFloat(self.count) * h + fmax(CGFloat((self.count - 1)), CGFloat(0)) * verticalMargin
         var y: CGFloat = (rect.origin.y + rect.size.height / 2) - (totalHeight / 2) + h / 2
 
         for i in (0 ..< count) {
@@ -104,7 +117,10 @@ class PageIndicatorView: UIControl {
             
             drawCircleInContext(ctx, atOrigin: origin, withRadius: r, fill: fill)
 
-            y += (h + margin)
+            let touchRect = touchRectForCircleAtOrigin(origin, withRadius: r, inRect: rect)
+            self.indicatorTouchRects.append(touchRect)
+            
+            y += (h + verticalMargin)
         }
         
         ctx.restoreGState()
@@ -113,7 +129,7 @@ class PageIndicatorView: UIControl {
     // MARK: - Layout
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        let width = min(16, size.width)
+        let width = min(16 + (self.horizontalMargin * 2), size.width)
         return CGSize(width: width, height: size.height)
     }
     
@@ -139,9 +155,32 @@ class PageIndicatorView: UIControl {
         // TODO: When user touch, immediately navigate to the nearest page
         //  Perhaps create a list of rects for circles and send touched index
         //  back through a delegate.
+        
+        guard let touch = touches.first else {
+            return
+        }
+        
+        let point = touch.location(in: self)
+        
+        guard let touchedRect = (self.indicatorTouchRects.filter { rect in
+            return rect.contains(point)
+        }).first else { return }
+        
+        if let index = self.indicatorTouchRects.index(of: touchedRect) {
+            self.delegate?.pageIndicatorView(self, touchedIndicatorAtIndex: index)
+        }
     }
 
     // MARK: - Private
+    
+    private func touchRectForCircleAtOrigin(_ origin: CGPoint, withRadius radius: CGFloat, inRect rect: CGRect) -> CGRect {
+        var touchRect = CGRect()
+        touchRect.origin.y = origin.y - radius
+        touchRect.origin.x = 0
+        touchRect.size.height = radius * 2
+        touchRect.size.width = rect.width
+        return touchRect
+    }
     
     private func drawCircleInContext(_ ctx: CGContext, atOrigin origin: CGPoint, withRadius radius: CGFloat, fill: Bool) {
         let endAngle = CGFloat(GLKMathDegreesToRadians(360))
