@@ -12,22 +12,32 @@ class SurveysViewController: UIPageViewController {
     private var refreshButton: UIBarButtonItem?
     private var menuButton: UIBarButtonItem?
     
-    fileprivate var pageIndicatorView: PageIndicatorView?
+    fileprivate var pageIndicatorView = PageIndicatorView()
+
+    fileprivate var loadingViewController: LoadingViewController? {
+        return self.viewControllers?.first as? LoadingViewController
+    }
 
     fileprivate var currentPageIndex: Int = 0 {
         didSet {
-            self.pageIndicatorView?.index = self.currentPageIndex
+            self.pageIndicatorView.index = self.currentPageIndex
         }
     }
 
     private(set) var pageViewControllers = [UIViewController]() {
         didSet {
-            self.pageIndicatorView?.count = self.pageViewControllers.count
+            self.pageIndicatorView.count = self.pageViewControllers.count
 
             if let viewController = self.pageViewControllers.first {
                 self.setViewControllers([viewController], direction: .forward, animated: true, completion: nil)
             } else {
-                self.setViewControllers([UIViewController()], direction: .reverse, animated: true, completion: nil)
+                let viewController = LoadingViewController()
+                viewController.delegate = self
+                self.setViewControllers([viewController], direction: .reverse, animated: true, completion: nil)
+            }
+            
+            UIView.animate(withDuration: AnimationDuration.short) { 
+                self.pageIndicatorView.alpha = 1.0
             }
             
             self.currentPageIndex = 0
@@ -50,27 +60,27 @@ class SurveysViewController: UIPageViewController {
         self.title = "Surveys"
         
         self.view.backgroundColor = AppTheme.backgroundColor
-        
-        let refreshImage = UIImage(named: "refresh")?.withRenderingMode(.alwaysTemplate)
-        self.refreshButton = UIBarButtonItem(image: refreshImage, style: .plain, target: self, action: #selector(refreshAction))
-        self.navigationItem.leftBarButtonItem = self.refreshButton
-        
-        let menuImage = UIImage(named: "menu")?.withRenderingMode(.alwaysTemplate)
-        self.menuButton = UIBarButtonItem(image: menuImage, style: .plain, target: self, action: #selector(menuAction))
-        self.navigationItem.rightBarButtonItem = self.menuButton
 
-        let pageIndicatorView = PageIndicatorView()
-        self.view.addSubview(pageIndicatorView);
-        self.pageIndicatorView = pageIndicatorView
-        self.pageIndicatorView?.delegate = self
+        let refreshImage = UIImage(named: "refresh")
+        self.refreshButton = UIBarButtonItem(image: refreshImage, style: .plain, target: self, action: #selector(refreshAction))
         
+        let menuImage = UIImage(named: "menu")
+        self.menuButton = UIBarButtonItem(image: menuImage, style: .plain, target: self, action: #selector(menuAction))
+
+        updateNavigationItemsVisible(false)
+        
+        self.view.addSubview(self.pageIndicatorView);
+        self.pageIndicatorView.alpha = 0.0
+        self.pageIndicatorView.animationDuration = AnimationDuration.short
+        self.pageIndicatorView.delegate = self
+
         self.dataSource = self
         self.delegate = self
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
         if self.pageViewControllers.count == 0 {
             refreshAction()
         }
@@ -79,15 +89,13 @@ class SurveysViewController: UIPageViewController {
     override func viewDidLayoutSubviews() {
         let bounds = self.view.bounds
         
-        if let indicatorView = self.pageIndicatorView {
-            let margin: CGFloat = 10
-            let maxHeight = bounds.height - margin * 2 - self.topLayoutGuide.length
-            let sizeConstraint = CGSize(width: bounds.width, height: maxHeight)
-            let viewSize = indicatorView.sizeThatFits(sizeConstraint)
-            let x = bounds.width - viewSize.width - margin
-            let y = self.topLayoutGuide.length + margin
-            indicatorView.frame = CGRect(x: x, y: y, width: viewSize.width, height: viewSize.height)
-        }
+        let margin: CGFloat = 10
+        let maxHeight = bounds.height - margin * 2 - self.topLayoutGuide.length
+        let sizeConstraint = CGSize(width: bounds.width, height: maxHeight)
+        let viewSize = self.pageIndicatorView.sizeThatFits(sizeConstraint)
+        let x = bounds.width - viewSize.width - margin
+        let y = self.topLayoutGuide.length + margin
+        self.pageIndicatorView.frame = CGRect(x: x, y: y, width: viewSize.width, height: viewSize.height)
         
         super.viewDidLayoutSubviews()
     }
@@ -95,21 +103,27 @@ class SurveysViewController: UIPageViewController {
     // MARK: - Actions
     
     @IBAction func refreshAction() {
-        self.refreshButton?.isEnabled = false
+        if self.loadingViewController == nil {
+            self.pageViewControllers = []
+        }
+        
+        self.loadingViewController?.startLoading()
+        updateNavigationItemsVisible(false)
         
         do {
             try SurveyApiClient.shared.loadSurveys(page: 1, count: 5, completion: { (result, error) in
-                self.refreshButton?.isEnabled = true
-                
                 guard let surveys = result else {
-                    // TODO: Show error.
+                    self.loadingViewController?.updateWithError(error)
+                    self.updateNavigationItemsVisible(false)
                     return
                 }
-                
+
+                self.updateNavigationItemsVisible(true)
                 self.updateWithSurveys(surveys)
             })
         } catch let error {
-            print("error: \(error)")
+            self.loadingViewController?.updateWithError(error)
+            updateNavigationItemsVisible(false)
         }
     }
     
@@ -118,6 +132,16 @@ class SurveysViewController: UIPageViewController {
     }
     
     // MARK: - Private
+    
+    private func updateNavigationItemsVisible(_ isVisible: Bool) {
+        if isVisible  {
+            self.navigationItem.setLeftBarButton(self.refreshButton, animated: true)
+            self.navigationItem.setRightBarButton(self.menuButton, animated: true)
+        } else {
+            self.navigationItem.setLeftBarButton(nil, animated: true)
+            self.navigationItem.setRightBarButton(nil, animated: true)
+        }
+    }
     
     fileprivate func navigateToPageIndex(_ pageIndex: Int) {
         guard (0 ..< self.pageViewControllers.count).contains(pageIndex) else {
@@ -163,6 +187,14 @@ extension SurveysViewController: UIPageViewControllerDataSource {
         }
 
         return nil
+    }
+}
+
+// MARK: - 
+
+extension SurveysViewController: LoadingViewControllerDelegate {
+    func loadingViewControllerReloadAction(_ viewController: LoadingViewController) {
+        refreshAction()
     }
 }
 

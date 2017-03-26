@@ -16,6 +16,9 @@
 		791312111E86776F009D0064 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791312101E86776F009D0064 /* Constants.swift */; };
 		791312151E875832009D0064 /* UIPageControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791312141E875832009D0064 /* UIPageControllerExtensions.swift */; };
 		791312181E8784C6009D0064 /* SurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791312171E8784C6009D0064 /* SurveyViewController.swift */; };
+		7913121A1E8792C9009D0064 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791312191E8792C9009D0064 /* LoadingView.swift */; };
+		7913121C1E87A6E6009D0064 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7913121B1E87A6E6009D0064 /* LoadingView.xib */; };
+		7913121F1E87BB42009D0064 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7913121E1E87BB42009D0064 /* LoadingViewController.swift */; };
 		7959B1FD1E84D3F900F81327 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7959B1FC1E84D3F900F81327 /* Survey.swift */; };
 		79F33F681E823EDD00634B9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F33F671E823EDD00634B9C /* AppDelegate.swift */; };
 		79F33F6F1E823EDD00634B9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79F33F6E1E823EDD00634B9C /* Assets.xcassets */; };
@@ -56,6 +59,9 @@
 		791312101E86776F009D0064 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		791312141E875832009D0064 /* UIPageControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPageControllerExtensions.swift; sourceTree = "<group>"; };
 		791312171E8784C6009D0064 /* SurveyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyViewController.swift; sourceTree = "<group>"; };
+		791312191E8792C9009D0064 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		7913121B1E87A6E6009D0064 /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
+		7913121E1E87BB42009D0064 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		7959B1FC1E84D3F900F81327 /* Survey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
 		79F33F641E823EDD00634B9C /* Nimbl3Survey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nimbl3Survey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79F33F671E823EDD00634B9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +141,8 @@
 			isa = PBXGroup;
 			children = (
 				791311FD1E852141009D0064 /* PageIndicatorView.swift */,
+				791312191E8792C9009D0064 /* LoadingView.swift */,
+				7913121B1E87A6E6009D0064 /* LoadingView.xib */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -142,6 +150,7 @@
 		791312091E86310E009D0064 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7913121D1E87BB21009D0064 /* LoadingViewController */,
 				791312161E8784B4009D0064 /* SurveyViewController */,
 				7913120A1E863115009D0064 /* SurveysViewController */,
 				7913120B1E863124009D0064 /* SurveyInfoViewController */,
@@ -173,6 +182,14 @@
 				791312171E8784C6009D0064 /* SurveyViewController.swift */,
 			);
 			name = SurveyViewController;
+			sourceTree = "<group>";
+		};
+		7913121D1E87BB21009D0064 /* LoadingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7913121E1E87BB42009D0064 /* LoadingViewController.swift */,
+			);
+			name = LoadingViewController;
 			sourceTree = "<group>";
 		};
 		7959B1FB1E84D3E700F81327 /* Model */ = {
@@ -366,6 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79F33F9A1E82812E00634B9C /* SurveyInfoView.xib in Resources */,
+				7913121C1E87A6E6009D0064 /* LoadingView.xib in Resources */,
 				79F33F721E823EDD00634B9C /* LaunchScreen.storyboard in Resources */,
 				79F33F6F1E823EDD00634B9C /* Assets.xcassets in Resources */,
 			);
@@ -444,11 +462,13 @@
 				79F33F961E82619200634B9C /* SurveyInfoView.swift in Sources */,
 				791311FE1E852141009D0064 /* PageIndicatorView.swift in Sources */,
 				791311FC1E8505C3009D0064 /* SurveyInfoViewController.swift in Sources */,
+				7913121F1E87BB42009D0064 /* LoadingViewController.swift in Sources */,
 				7959B1FD1E84D3F900F81327 /* Survey.swift in Sources */,
 				79F33F681E823EDD00634B9C /* AppDelegate.swift in Sources */,
 				79F33F9C1E8284A300634B9C /* InterfaceBuilderInstantiable.swift in Sources */,
 				7913120F1E863C62009D0064 /* UIColorExtensions.swift in Sources */,
 				791312151E875832009D0064 /* UIPageControllerExtensions.swift in Sources */,
+				7913121A1E8792C9009D0064 /* LoadingView.swift in Sources */,
 				791312181E8784C6009D0064 /* SurveyViewController.swift in Sources */,
 				79F33F981E827E9100634B9C /* UIImageExtensions.swift in Sources */,
 				7913120D1E863BC5009D0064 /* Theme.swift in Sources */,

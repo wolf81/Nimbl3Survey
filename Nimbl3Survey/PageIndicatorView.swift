@@ -18,6 +18,8 @@ protocol PageIndicatorViewDelegate: class {
 class PageIndicatorView: UIControl {
     private let horizontalMargin: CGFloat = 2
     
+    var animationDuration: TimeInterval = 0.2
+    
     weak var delegate: PageIndicatorViewDelegate?
     
     private var indicatorTouchRects = [CGRect]()
@@ -59,6 +61,10 @@ class PageIndicatorView: UIControl {
     var index: Int = NSNotFound {
         didSet {
             setNeedsDisplay()
+            
+            UIView.transition(with: self, duration: 0.2, options: [.transitionCrossDissolve, .beginFromCurrentState], animations: {
+                self.layer.displayIfNeeded()
+            }, completion: nil)
         }
     }
     
@@ -145,7 +151,7 @@ class PageIndicatorView: UIControl {
         didSet {
             setNeedsDisplay()
 
-            UIView.transition(with: self, duration: 0.2, options: [.transitionCrossDissolve, .beginFromCurrentState], animations: {
+            UIView.transition(with: self, duration: self.animationDuration, options: [.transitionCrossDissolve, .beginFromCurrentState], animations: {
                 self.layer.displayIfNeeded()
             }, completion: nil)
         }
@@ -155,7 +161,7 @@ class PageIndicatorView: UIControl {
         didSet {
             setNeedsDisplay()
 
-            UIView.transition(with: self, duration: 0.2, options: [.transitionCrossDissolve, .beginFromCurrentState], animations: {
+            UIView.transition(with: self, duration: self.animationDuration, options: [.transitionCrossDissolve, .beginFromCurrentState], animations: {
                 self.layer.displayIfNeeded()
             }, completion: nil)
         }

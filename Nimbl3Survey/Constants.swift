@@ -12,3 +12,7 @@ enum AppTheme {
     static let backgroundColor = UIColor(red: 20.0 / 255, green: 30.0 / 255, blue: 50.0 / 255, alpha: 1.0)
     static let foregroundColor = UIColor.white
 }
+
+enum AnimationDuration {
+    static let short: TimeInterval = 0.2
+}
