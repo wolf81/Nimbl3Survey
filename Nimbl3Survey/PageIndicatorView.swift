@@ -144,12 +144,20 @@ class PageIndicatorView: UIControl {
     override var isSelected: Bool {
         didSet {
             setNeedsDisplay()
+
+            UIView.transition(with: self, duration: 0.2, options: [.transitionCrossDissolve, .beginFromCurrentState], animations: {
+                self.layer.displayIfNeeded()
+            }, completion: nil)
         }
     }
     
     override var isHighlighted: Bool {
         didSet {
             setNeedsDisplay()
+
+            UIView.transition(with: self, duration: 0.2, options: [.transitionCrossDissolve, .beginFromCurrentState], animations: {
+                self.layer.displayIfNeeded()
+            }, completion: nil)
         }
     }
 
