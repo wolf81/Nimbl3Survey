@@ -12,8 +12,6 @@ class SurveysViewController: UIPageViewController {
     private var refreshButton: UIBarButtonItem?
     private var menuButton: UIBarButtonItem?
     
-    fileprivate var isNavigating: Bool = false
-
     fileprivate var pageIndicatorView: PageIndicatorView?
 
     fileprivate var currentPageIndex: Int = 0 {
@@ -121,43 +119,17 @@ class SurveysViewController: UIPageViewController {
     
     // MARK: - Private
     
-    func navigateToPageAtIndex(_ pageIndex: Int) {
-        self.isNavigating = true
-
-        guard pageIndex != self.currentPageIndex else {
-            self.isNavigating = false
+    fileprivate func navigateToPageIndex(_ pageIndex: Int) {
+        guard (0 ..< self.pageViewControllers.count).contains(pageIndex) else {
             return
         }
         
-        var navDirection: UIPageViewControllerNavigationDirection
-        var nextPageIndex: Int
+        let direction: UIPageViewControllerNavigationDirection = pageIndex > self.currentPageIndex ? .forward : .reverse
         
-        switch self.currentPageIndex {
-        case _ where self.currentPageIndex > pageIndex:
-            navDirection = .reverse
-            nextPageIndex = self.currentPageIndex - 1
-        case _ where self.currentPageIndex < pageIndex:
-            navDirection = .forward
-            nextPageIndex = self.currentPageIndex + 1
-        default: return
+        let nextViewController = self.pageViewControllers[pageIndex]
+        setViewControllers([nextViewController], direction: direction, animated: true) { finished in
+            self.currentPageIndex = pageIndex
         }
-
-        let nextViewController = self.pageViewControllers[nextPageIndex]
-
-        setViewControllers([nextViewController], direction: navDirection, animated: true, completion: { [weak self] finished in
-            DispatchQueue.main.async {
-                guard let pvc = self else { return }
-                
-                // Prevent a caching bug by navigating again to the same view controller without animation.
-                pvc.setViewControllers([nextViewController], direction: navDirection, animated: false, completion: nil)
-                
-                if let currentPageIndex = pvc.pageViewControllers.index(of: nextViewController) {
-                    pvc.currentPageIndex = currentPageIndex
-                }
-                
-                pvc.navigateToPageAtIndex(pageIndex)
-            }
-        })
     }
     
     // MARK: - Public
@@ -197,10 +169,16 @@ extension SurveysViewController: UIPageViewControllerDataSource {
 // MARK: - PageIndicatorViewDelegate
 
 extension SurveysViewController: PageIndicatorViewDelegate {
-    func pageIndicatorView(_ view: PageIndicatorView, touchedIndicatorAtIndex index: Int) {
-        guard self.isNavigating == false else { return }
+    func pageIndicatorViewNavigateNextAction(_ view: PageIndicatorView) {
+        navigateToPageIndex(self.currentPageIndex - 1)
+    }
+    
+    func pageIndicatorViewNavigatePreviousAction(_ view: PageIndicatorView) {
+        navigateToPageIndex(self.currentPageIndex + 1)
+    }
 
-        navigateToPageAtIndex(index)
+    func pageIndicatorView(_ view: PageIndicatorView, touchedIndicatorAtIndex index: Int) {
+        navigateToPageIndex(index)
     }
 }
 

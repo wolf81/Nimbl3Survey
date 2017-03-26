@@ -10,6 +10,8 @@ import UIKit
 import GLKit
 
 protocol PageIndicatorViewDelegate: class {
+    func pageIndicatorViewNavigateNextAction(_ view: PageIndicatorView)
+    func pageIndicatorViewNavigatePreviousAction(_ view: PageIndicatorView)
     func pageIndicatorView(_ view: PageIndicatorView, touchedIndicatorAtIndex index: Int)
 }
 
@@ -72,6 +74,13 @@ class PageIndicatorView: UIControl {
         }
     }
     
+    var verticalMargin: CGFloat = 10 {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+
+    
     // MARK: - Drawing
 
     override func draw(_ rect: CGRect) {
@@ -94,9 +103,6 @@ class PageIndicatorView: UIControl {
             ctx.setFillColor(backgroundColor.cgColor)
             ctx.fill(rect)
         }
-        
-        let lineWidth: CGFloat = 2
-        let verticalMargin: CGFloat = 10
         
         let foregroundColor = highlighted ? self.indicatorColor.withAlphaComponent(0.5) : self.indicatorColor
         
@@ -152,32 +158,34 @@ class PageIndicatorView: UIControl {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         
-        // TODO: When user touch, immediately navigate to the nearest page
-        //  Perhaps create a list of rects for circles and send touched index
-        //  back through a delegate.
-        
         guard let touch = touches.first else {
             return
         }
         
         let point = touch.location(in: self)
         
-        guard let touchedRect = (self.indicatorTouchRects.filter { rect in
-            return rect.contains(point)
-        }).first else { return }
-        
-        if let index = self.indicatorTouchRects.index(of: touchedRect) {
-            self.delegate?.pageIndicatorView(self, touchedIndicatorAtIndex: index)
+        if let touchedRect = (self.indicatorTouchRects.filter { $0.contains(point) }).first {
+            if let index = self.indicatorTouchRects.index(of: touchedRect) {
+                self.delegate?.pageIndicatorView(self, touchedIndicatorAtIndex: index)
+            }
+        } else {
+            if point.y > (self.indicatorTouchRects.first?.minY)! {
+                self.delegate?.pageIndicatorViewNavigatePreviousAction(self)
+            } else if point.y < (self.indicatorTouchRects.last?.maxY)! {
+                self.delegate?.pageIndicatorViewNavigateNextAction(self)
+            }
         }
     }
 
     // MARK: - Private
     
     private func touchRectForCircleAtOrigin(_ origin: CGPoint, withRadius radius: CGFloat, inRect rect: CGRect) -> CGRect {
+        let yOffset = (self.verticalMargin / 2) + self.lineWidth
+        
         var touchRect = CGRect()
-        touchRect.origin.y = origin.y - radius
+        touchRect.origin.y = origin.y - radius - yOffset
         touchRect.origin.x = 0
-        touchRect.size.height = radius * 2
+        touchRect.size.height = (radius * 2) + (yOffset * 2)
         touchRect.size.width = rect.width
         return touchRect
     }
