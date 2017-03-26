@@ -107,15 +107,13 @@ class SurveysViewController: UIPageViewController {
             self.pageViewControllers = []
         }
         
-        self.loadingViewController?.startLoading()
+        self.loadingViewController?.state = .loading
         updateNavigationItemsVisible(false)
         
         do {
             try SurveyApiClient.shared.loadSurveys(page: 1, count: 5, completion: { (result, error) in
-                self.loadingViewController?.stopLoading()
-                
                 guard let surveys = result else {
-                    self.loadingViewController?.updateWithError(error)
+                    self.loadingViewController?.state = .error(error: error)
                     self.updateNavigationItemsVisible(false)
                     return
                 }
@@ -124,7 +122,7 @@ class SurveysViewController: UIPageViewController {
                 self.updateWithSurveys(surveys)
             })
         } catch let error {
-            self.loadingViewController?.updateWithError(error)
+            self.loadingViewController?.state = .error(error: error)
             updateNavigationItemsVisible(false)
         }
     }

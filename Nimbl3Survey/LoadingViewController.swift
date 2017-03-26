@@ -12,12 +12,30 @@ protocol LoadingViewControllerDelegate: class {
     func loadingViewControllerReloadAction(_ viewController: LoadingViewController)
 }
 
+enum LoadingViewControllerState {
+    case loading
+    case error(error: Error?)
+}
+
 class LoadingViewController: UIViewController {
     weak var delegate: LoadingViewControllerDelegate?
+    
+    var state: LoadingViewControllerState = .loading {
+        didSet {
+            switch self.state {
+            case .error(let error):
+                self.loadingView.updateWithError(error)
+            case .loading:
+                self.loadingView.startLoading()
+            }
+        }
+    }
     
     private var loadingView: LoadingView {
         return self.view as! LoadingView
     }
+    
+    // MARK: - Initialization & clean-up
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -26,6 +44,8 @@ class LoadingViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
+    
+    // MARK: - View lifecycle
     
     override func loadView() {
         self.view = LoadingView.instantiateFromInterfaceBuilder()
@@ -43,21 +63,12 @@ class LoadingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.loadingView.startLoading()
-    }
-    
-    // MARK: Public
-    
-    func startLoading() {
-        self.loadingView.startLoading()
-    }
-    
-    func updateWithError(_ error: Error?) {
-        self.loadingView.updateWithError(error)
-    }
-    
-    func stopLoading() {
-        self.loadingView.stopLoading()
+        switch self.state {
+        case .loading:
+            self.loadingView.startLoading()
+        case .error(let error):
+            self.loadingView.updateWithError(error)
+        }
     }
 }
 

@@ -27,13 +27,14 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PV1-v4-B4j">
-                    <rect key="frame" x="100" y="149" width="100" height="34"/>
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PV1-v4-B4j">
+                    <rect key="frame" x="130" y="148.5" width="40" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="100" id="Tpq-bL-iQf"/>
+                        <constraint firstAttribute="width" constant="40" id="hVw-g8-cVc"/>
+                        <constraint firstAttribute="height" constant="40" id="zt0-vG-Znz"/>
                     </constraints>
                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Reload">
+                    <state key="normal" image="refresh">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
@@ -75,5 +76,6 @@
     </objects>
     <resources>
         <image name="loading" width="40" height="40"/>
+        <image name="refresh" width="24" height="24"/>
     </resources>
 </document>
