@@ -11,6 +11,8 @@ import UIKit
 class SurveyViewController: UIViewController {
     private(set) var survey: Survey
     
+    // MARK: - Initialization & clean-up
+    
     init(survey: Survey) {
         self.survey = survey
         
@@ -20,6 +22,8 @@ class SurveyViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
+    
+    // MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()

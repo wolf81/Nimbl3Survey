@@ -14,7 +14,6 @@
 		7913120D1E863BC5009D0064 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7913120C1E863BC5009D0064 /* Theme.swift */; };
 		7913120F1E863C62009D0064 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7913120E1E863C62009D0064 /* UIColorExtensions.swift */; };
 		791312111E86776F009D0064 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791312101E86776F009D0064 /* Constants.swift */; };
-		791312151E875832009D0064 /* UIPageControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791312141E875832009D0064 /* UIPageControllerExtensions.swift */; };
 		791312181E8784C6009D0064 /* SurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791312171E8784C6009D0064 /* SurveyViewController.swift */; };
 		7913121A1E8792C9009D0064 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791312191E8792C9009D0064 /* LoadingView.swift */; };
 		7913121C1E87A6E6009D0064 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7913121B1E87A6E6009D0064 /* LoadingView.xib */; };
@@ -58,7 +57,6 @@
 		7913120C1E863BC5009D0064 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		7913120E1E863C62009D0064 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		791312101E86776F009D0064 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		791312141E875832009D0064 /* UIPageControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPageControllerExtensions.swift; sourceTree = "<group>"; };
 		791312171E8784C6009D0064 /* SurveyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyViewController.swift; sourceTree = "<group>"; };
 		791312191E8792C9009D0064 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7913121B1E87A6E6009D0064 /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 			children = (
 				79F33F971E827E9100634B9C /* UIImageExtensions.swift */,
 				7913120E1E863C62009D0064 /* UIColorExtensions.swift */,
-				791312141E875832009D0064 /* UIPageControllerExtensions.swift */,
 				791312201E87D7BE009D0064 /* UIViewExtensions.swift */,
 			);
 			name = Extensions;
@@ -144,8 +141,6 @@
 			isa = PBXGroup;
 			children = (
 				791311FD1E852141009D0064 /* PageIndicatorView.swift */,
-				791312191E8792C9009D0064 /* LoadingView.swift */,
-				7913121B1E87A6E6009D0064 /* LoadingView.xib */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -173,8 +168,8 @@
 			isa = PBXGroup;
 			children = (
 				791311FB1E8505C3009D0064 /* SurveyInfoViewController.swift */,
-				79F33F991E82812E00634B9C /* SurveyInfoView.xib */,
 				79F33F951E82619200634B9C /* SurveyInfoView.swift */,
+				79F33F991E82812E00634B9C /* SurveyInfoView.xib */,
 			);
 			name = SurveyInfoViewController;
 			sourceTree = "<group>";
@@ -191,6 +186,8 @@
 			isa = PBXGroup;
 			children = (
 				7913121E1E87BB42009D0064 /* LoadingViewController.swift */,
+				791312191E8792C9009D0064 /* LoadingView.swift */,
+				7913121B1E87A6E6009D0064 /* LoadingView.xib */,
 			);
 			name = LoadingViewController;
 			sourceTree = "<group>";
@@ -470,7 +467,6 @@
 				79F33F681E823EDD00634B9C /* AppDelegate.swift in Sources */,
 				79F33F9C1E8284A300634B9C /* InterfaceBuilderInstantiable.swift in Sources */,
 				7913120F1E863C62009D0064 /* UIColorExtensions.swift in Sources */,
-				791312151E875832009D0064 /* UIPageControllerExtensions.swift in Sources */,
 				7913121A1E8792C9009D0064 /* LoadingView.swift in Sources */,
 				791312181E8784C6009D0064 /* SurveyViewController.swift in Sources */,
 				79F33F981E827E9100634B9C /* UIImageExtensions.swift in Sources */,
