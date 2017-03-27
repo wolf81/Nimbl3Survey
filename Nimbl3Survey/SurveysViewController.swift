@@ -9,7 +9,7 @@
 import UIKit
 
 class SurveysViewController: UIPageViewController {
-    private var refreshButton: UIBarButtonItem?
+    private var reloadButton: UIBarButtonItem?
     private var menuButton: UIBarButtonItem?
     
     fileprivate var pageIndicatorView = PageIndicatorView()
@@ -61,8 +61,8 @@ class SurveysViewController: UIPageViewController {
         
         self.view.backgroundColor = AppTheme.backgroundColor
 
-        let refreshImage = UIImage(named: "refresh")
-        self.refreshButton = UIBarButtonItem(image: refreshImage, style: .plain, target: self, action: #selector(refreshAction))
+        let reloadImage = UIImage(named: "refresh")
+        self.reloadButton = UIBarButtonItem(image: reloadImage, style: .plain, target: self, action: #selector(reloadAction))
         
         let menuImage = UIImage(named: "menu")
         self.menuButton = UIBarButtonItem(image: menuImage, style: .plain, target: self, action: #selector(menuAction))
@@ -82,7 +82,7 @@ class SurveysViewController: UIPageViewController {
         super.viewDidAppear(animated)
 
         if self.pageViewControllers.count == 0 {
-            refreshAction()
+            reloadAction()
         }
     }
     
@@ -102,7 +102,7 @@ class SurveysViewController: UIPageViewController {
     
     // MARK: - Actions
     
-    @IBAction func refreshAction() {
+    @IBAction func reloadAction() {
         if self.loadingViewController == nil {
             self.pageViewControllers = []
         }
@@ -135,7 +135,7 @@ class SurveysViewController: UIPageViewController {
     
     private func updateNavigationItemsVisible(_ isVisible: Bool) {
         if isVisible  {
-            self.navigationItem.setLeftBarButton(self.refreshButton, animated: true)
+            self.navigationItem.setLeftBarButton(self.reloadButton, animated: true)
             self.navigationItem.setRightBarButton(self.menuButton, animated: true)
         } else {
             self.navigationItem.setLeftBarButton(nil, animated: true)
@@ -194,7 +194,7 @@ extension SurveysViewController: UIPageViewControllerDataSource {
 
 extension SurveysViewController: LoadingViewControllerDelegate {
     func loadingViewControllerReloadAction(_ viewController: LoadingViewController) {
-        refreshAction()
+        reloadAction()
     }
 }
 
